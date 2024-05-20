@@ -1,0 +1,234 @@
+@media screen and (max-width: 768px) {
+  /* Styles spécifiques pour les appareils mobiles */
+}
+
+
+body {
+  background: linear-gradient(to right, #1a1a1a, #333, #1a1a1a);
+
+
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+  }
+
+ /* Style spécifique pour le header */
+header.header-section {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+/* Style de base pour les éléments de la barre de navigation */
+.header-section .flex-box {
+  display: inline-block;
+  margin: 0 20px;
+  transition: transform 0.3s;
+}
+
+/* Espacement supplémentaire et animation pour les éléments "Contact" et "Music YT Converter" */
+.header-section .contact-box {
+  margin-right: 40px; /* Espacement supplémentaire à droite */
+  animation: slideLeft 1s ease-out forwards; /* Animation d'apparition vers la gauche */
+}
+
+.header-section .converter-box {
+  margin-left: 40px; /* Espacement supplémentaire à gauche */
+  animation: slideRight 1s ease-out forwards; /* Animation d'apparition vers la gauche */
+}
+
+/* Style au survol des éléments de la barre de navigation */
+.header-section .flex-box:hover {
+  transform: scale(1.1);
+}
+
+/* Style pour les liens dans la barre de navigation */
+.header-section .flex-box a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Style au survol des liens dans la barre de navigation */
+.header-section .flex-box a:hover {
+  color: red;
+}
+
+/* Animation d'apparition vers la gauche */
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%); /* Départ depuis la droite de la page */
+  }
+  to {
+    transform: translateX(0); /* Arrivée à la position normale */
+  }
+}
+
+/* Animation d'apparition vers la droite (pour l'élément "Music YT Converter") */
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%); /* Départ depuis la gauche de la page */
+  }
+  to {
+    transform: translateX(0); /* Arrivée à la position normale */
+  }
+}
+
+/* Style spécifique pour les icônes de réseaux sociaux */
+.social-icons img {
+  width: 30px; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Conservez la proportion d'origine */
+  margin-right: 10px; /* Espacement entre les icônes */
+  display: inline-block; /* Affiche les icônes horizontalement */
+}
+
+/* Style spécifique pour les icônes de réseaux sociaux */
+.social-icons .social-icon {
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.3s; /* Animation de transformation */
+}
+
+/* Effet de grossissement au survol */
+.social-icons .social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+/*BM TECH LOGO */
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+   100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.BM_TECH {
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+
+
+
+
+
+
+#france-gradient {
+  position: relative;
+  font-weight: bold;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 35px;
+  margin-bottom: 10px;
+  width: 100%; /* La largeur du drapeau occupe toute la largeur de son conteneur */
+  height: 100px; /* Hauteur fixe du drapeau */
+  background: linear-gradient(to right, #0055A4 0%, #0055A4 33%, #FFFFFF 33%, #FFFFFF 66%, #EF4135 66%, #EF4135 100%);
+  text-align: center;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Ajoute une ombre au texte */
+  color: black;
+}
+
+
+h1 {
+  font-weight: bold;
+   
+  font-size: 40px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Ajoute une ombre au texte */
+  color: orange; /* Couleur du texte en noir */
+  background-color: black; /* Couleur de l'arrière-plan en blanc */
+}
+
+ 
+ 
+
+h2 {
+  font-size: 45px; /* Augmentation significative de la taille du texte */
+  color: #FF5733; /* Couleur du texte audacieuse */
+  font-family: 'Impact', sans-serif; /* Police de caractères audacieuse */
+  text-transform: uppercase; /* Texte en majuscules */
+  letter-spacing: 5px; /* Espacement entre les lettres */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Ombre portée pour le texte */
+  margin-bottom: 20px; /* Espacement sous le titre */
+}
+
+
+p {
+  font-size: 18px; /* Augmentation de la taille du texte */
+  color: white; /* Couleur du texte */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+}
+
+ 
+  .colory {
+    font-size: 30px;
+   font-weight: bold;
+  }
+  img {
+    border-radius: 35px;
+  }
+
+
+ /* Style de base pour tous les liens dans le pied de page */
+.footer-links a {
+  color: blue; /* Couleur du texte */
+  text-decoration: none;
+  background-color: white; /* Couleur de l'arrière-plan */
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style au survol des liens */
+.footer-links a:hover {
+  background-color: black;
+  color: yellow;
+  transform: scale(1.1);
+}
+
+/* Style pour le bouton "Retour en haut" */
+.back-to-top-button {
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* Style au survol du bouton "Retour en haut" */
+.back-to-top-button:hover {
+  background-color: red;
+  color: white;
+  transform: scale(1.1);
+}
+.dimension {
+  width: 70%;
+  height: 60%;
+  display: block; /* Pour centrer horizontalement */
+  margin: 0 auto; /* Pour centrer horizontalement */
+}
+
+.dimension-container {
+  display: flex;
+  justify-content: center; /* Pour centrer horizontalement */
+  align-items: center; /* Pour centrer verticalement */
+  height: 100vh; /* Ajustez la hauteur du conteneur parent selon vos besoins */
+}
+
+.dimension {
+  width: 70%;
+  height: 60%;
+  max-width: 100%; /* Pour éviter le dépassement de la largeur du conteneur parent */
+  max-height: 100%; /* Pour éviter le dépassement de la hauteur du conteneur parent */
+}
