@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Universel</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+         header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus */
+        nav ul .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1797ca;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        nav ul .submenu li {
+            padding: 10px;
+            white-space: nowrap;
+        }
+
+        nav ul .submenu li a {
+            color: rgb(250, 247, 247);
+            text-decoration: none;
+        }
+
+        nav ul .submenu li a:hover {
+            color: #007bff;
+        }
+
+        nav ul li:hover > .submenu {
+            display: block;
+        }
+
+        nav ul .submenu .submenu {
+            left: 100%;
+            top: 0;
+        }
+
+        /* Styles pour la barre de recherche */
+        .search-container {
+            position: relative;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: #999;
+        }
+
+        .search-container input[type="text"]:focus {
+            border: 2px solid #007bff;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgb(23, 156, 180);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: none;
+        }
+
+        .suggestions li {
+            list-style: none;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #383838;
+        }
+
+        .suggestions li:hover {
+            background-color: #1e82c4;
+        }
+        .quiz-widget {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #fdf3f3;
+            margin: 10px;
+            border-radius: 10px;
+            color: rgb(43, 43, 43);
+            text-align: center;
+        }
+
+        .quiz-widget img {
+            max-width: 100px;
+            border-radius: 10px;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .quiz-widget {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .quiz-list:hover .carousel-nav {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-nav button {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: rgb(83, 83, 83); /* Button color set to grey */
+            cursor: pointer;
+            pointer-events: all;
+            transition: color 0.3s;
+        }
+
+        .carousel-nav button:hover {
+            color: #ff6b6b;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            width: 100%;
+        }
+
+        .quiz-container.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+
+        /* Animation for hiding other quizzes */
+        .quiz-container:hover ~ .quiz-container {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+
+        .quiz-container:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animation for reappearing quizzes */
+        .quiz-container:not(:hover) {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://media.istockphoto.com/vectors/quiz-concept-quiz-word-vector-illustration-vector-id1204641429?k=20&m=1204641429&s=170667a&w=0&h=jJUVf9Nn9qtI4ZrCvtvLhkPohwq_RTHrWzYotS0qNGs=" style="border-radius: 50%;" alt="Logo du Quiz">
+        </div>
+        <div class="search-container">
+          <input type="text" id="search-bar" placeholder="Rechercher un quiz...">
+          <ul class="suggestions" id="suggestions-list"></ul>
+      </div>
+      
+      <nav>
+          <ul class="menu">
+              <li>
+                  <a href="#">Catégories</a>
+                  <ul class="submenu">
+                      <li>
+                          <a href="#">Informatique</a>
+                          <ul class="submenu">
+                              <li><a href="quiz_it_debutant.html">Débutant</a></li>
+                              <li><a href="quiz_it_intermediaire.html">Intermédiaire</a></li>
+                              <li><a href="quiz_it.html">Avancé</a></li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#">Sport</a>
+                          <ul class="submenu">
+                              <li><a href="quiz_foot_debutant.html">Football Débutant</a></li>
+                              <li><a href="quiz_foot_intermediaire.html">Football Intermédiaire</a></li>
+                              <li><a href="quiz_foot.html">Football Avancé</a></li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a href="#">Culture Générale</a>
+                          <ul class="submenu">
+                              <li><a href="quiz_film.html">Films</a></li>
+                              <li><a href="quiz-JO.html">Histoire des JO</a></li>
+                              <li><a href="quiz-science.html">Science</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </li>
+              <li><a href="../fichier secondaires/index.html">Retour</a></li>
+              <li><a href="../fichier secondaires/a_propos.html">Blog</a></li>
+          </ul>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 id="placement">Testez vos connaissances !</h2>
+            <p><i>Le <mark>QUIZ</mark> des films disney le plus difficile !</i></p>
+            <a href="../quizz/quizz_Disney.html"> 
+            <button class="btn-jouer">Jouer maintenant</button></a>
+        </section>
+        <h3 id="under">20 questions</h3>
+        <section class="categories">
+            <h2 id="styl">Catégories</h2>
+            <div class="categorie">
+                <img src="https://wallpapercave.com/wp/wp7893956.jpg" alt="Icône ciné">
+                <h3>Films</h3>
+                <p>Testez vos connaissances cinématographique !</p>
+                <a href="quiz_film.html">Commencer le quiz</a>
+            </div>
+            <div class="categorie">
+                <img src="https://www.wallpaperflare.com/static/954/381/189/olympic-bright-colourfull-circle-wallpaper.jpg" alt="Icône JO">
+                <h3>Histoire des JO</h3>
+                <p>Parcourez les époques et les événements marquants de l'histoire des jeux Olympique !</p>
+                <a href="quiz-JO.html">Commencer le quiz</a>
+            </div>
+            <div class="categorie">
+                <img src="https://www.logolynx.com/images/logolynx/55/554afb8531e35ee34ee3f4dd8cebc7dc.png" alt="Icône Astronomie">
+                <h3>Science</h3>
+                <p>Découvrez les mystères de l'univers et ses merveilles scientifiques.</p>
+                <a href="quiz-science.html">Commencer le quiz</a>
+            </div>
+        </section>
+
+        <div class="quiz-container">
+            <button class="open-quiz-btn">Les autres quiz</button>
+            <div class="quiz-list" style="display: none;">
+                <div class="quiz-list carousel quiz-it">
+                    <div class="carousel-track">
+                        <div class="quiz-widget">
+                            <img src="https://www.oelis.fr/wp-content/uploads/2020/09/informatique-multi-site.jpg" alt="Icône informatique">
+                            <h3>Informatique Débutant</h3>
+                            <p>Testez vos connaissances en Informatique Débutant !</p>
+                            <a href="quiz_it_debutant.html">Accéder au quiz</a>
+                        </div>
+                        <div class="quiz-widget">
+                            <img src="https://www.oelis.fr/wp-content/uploads/2020/09/informatique-multi-site.jpg" alt="Icône informatique">
+                            <h3>Informatique Intermédiaire</h3>
+                            <p>Testez vos connaissances en Informatique Intermédiaire !</p>
+                            <a href="quiz_it_intermediaire.html">Accéder au quiz</a>
+                        </div>
+                        <div class="quiz-widget">
+                            <img src="https://www.oelis.fr/wp-content/uploads/2020/09/informatique-multi-site.jpg" alt="Icône informatique">
+                            <h3>Informatique Avancé</h3>
+                            <p>Testez vos connaissances en Informatique Avancé !</p>
+                            <a href="quiz_it.html">Accéder au quiz</a>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button id="prev-it">&#10094;</button>
+                        <button id="next-it">&#10095;</button>
+                    </div>
+                </div>
+
+                <div class="quiz-list carousel quiz-foot">
+                    <div class="carousel-track">
+                        <div class="quiz-widget">
+                            <img src="https://www.soccerbible.com/media/117949/balls-3-min.jpg" alt="Football">
+                            <h3>L'histoire du Foot - Débutant</h3>
+                            <p>Testez vos connaissances en football débutant !</p>
+                            <a href="quiz_foot_debutant.html">Accéder au quiz</a>
+                        </div>
+                        <div class="quiz-widget">
+                            <img src="https://www.soccerbible.com/media/117949/balls-3-min.jpg" alt="Football">
+                            <h3>L'histoire du Foot - Intermédiaire</h3>
+                            <p>Testez vos connaissances en football intermédiaire !</p>
+                            <a href="quiz_foot_intermediaire.html">Accéder au quiz</a>
+                        </div>
+                        <div class="quiz-widget">
+                            <img src="https://www.soccerbible.com/media/117949/balls-3-min.jpg" alt="Football">
+                            <h3>L'histoire du Foot - Avancé</h3>
+                            <p>Testez vos connaissances en football avancé !</p>
+                            <a href="quiz_foot.html">Accéder au quiz</a>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button id="prev-foot">&#10094;</button>
+                        <button id="next-foot">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('.open-quiz-btn').click(function() {
+                $(this).siblings('.quiz-list').slideToggle();
+            });
+
+            // Animation on hover
+            $('.quiz-container').hover(function() {
+                $(this).siblings('.quiz-container').addClass('hidden');
+            }, function() {
+                $(this).siblings('.quiz-container').removeClass('hidden');
+            });
+        });
+
+        function initCarousel(containerClass, prevButtonId, nextButtonId) {
+            const track = document.querySelector(`.${containerClass} .carousel-track`);
+            const slides = Array.from(track.children);
+            const nextButton = document.querySelector(`#${nextButtonId}`);
+            const prevButton = document.querySelector(`#${prevButtonId}`);
+            let currentIndex = 0;
+
+            const setSlidePosition = (slide, index) => {
+                slide.style.left = `${100 * index}%`;
+            };
+
+            slides.forEach(setSlidePosition);
+
+            const moveToSlide = (track, currentSlide, targetSlide) => {
+                track.style.transform = `translateX(-${targetSlide.style.left})`;
+                currentSlide.classList.remove('current-slide');
+                targetSlide.classList.add('current-slide');
+            };
+
+            nextButton.addEventListener('click', () => {
+                const currentSlide = track.querySelector('.current-slide') || slides[0];
+                const nextSlide = currentSlide.nextElementSibling || slides[0];
+                moveToSlide(track, currentSlide, nextSlide);
+            });
+
+            prevButton.addEventListener('click', () => {
+                const currentSlide = track.querySelector('.current-slide') || slides[0];
+                const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1];
+                moveToSlide(track, currentSlide, prevSlide);
+            });
+        }
+
+        // Initialize carousels
+        initCarousel('quiz-it', 'prev-it', 'next-it');
+        initCarousel('quiz-foot', 'prev-foot', 'next-foot');
+
+        document.getElementById('search-bar').addEventListener('input', function() {
+    var query = this.value.toLowerCase();
+    var suggestionsList = document.getElementById('suggestions-list');
+    suggestionsList.innerHTML = '';
+
+    var quizzes = [
+        { title: 'Informatique Débutant', url: 'quiz_it_debutant.html' },
+        { title: 'Informatique Intermédiaire', url: 'quiz_it_intermediaire.html' },
+        { title: 'Informatique Avancé', url: 'quiz_it.html' },
+        { title: 'L\'histoire du Foot - Débutant', url: 'quiz_foot_debutant.html' },
+        { title: 'L\'histoire du Foot - Intermédiaire', url: 'quiz_foot_intermediaire.html' },
+        { title: 'L\'histoire du Foot - Avancé', url: 'quiz_foot.html' },
+        { title: 'Films', url: 'quiz_film.html' },
+        { title: 'Histoire des JO', url: 'quiz-JO.html' },
+        { title: 'Science', url: 'quiz-science.html' }
+    ];
+
+    var filteredQuizzes = quizzes.filter(function(quiz) {
+        return quiz.title.toLowerCase().includes(query);
+    });
+
+    filteredQuizzes.forEach(function(quiz) {
+        var li = document.createElement('li');
+        li.textContent = quiz.title;
+        li.addEventListener('click', function() {
+            window.location.href = quiz.url;
+        });
+        suggestionsList.appendChild(li);
+    });
+
+    // Affiche les suggestions si elles existent, sinon les cache
+    suggestionsList.style.display = filteredQuizzes.length > 0 ? 'block' : 'none';
+});
+
+// Cache la liste de suggestions si on clique en dehors
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) {
+        document.getElementById('suggestions-list').style.display = 'none';
+    }
+});
+
+    </script>
+    
+    <footer>
+        <p>&copy; 2024 - Défie tes amis et teste tes connaissances avec les Quiz les plus difficiles !</p>
+        <h4>Rejoins moi sur les réseaux !</h4>
+        <div class="reseaux-sociaux">
+            <img src="../image/doigt.gif" alt="Cliquez pour accéder à mes réseaux sociaux" class="arrow">
+            <a href="https://www.facebook.com/baptiste.boisson.7" id="colors"><i class="fab fa-facebook-f"></i>Facebook</a>
+            <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/" id="colors"><i class="fab fa-linkedin"></i>LinkedIn</a>
+            <a href="https://www.instagram.com/bmatheyy/" id="colors"><i class="fab fa-instagram"></i>Insta</a>
+        </div>
+    </footer>
+</body>
+</html>

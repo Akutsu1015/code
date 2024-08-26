@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeux Olympique Quiz</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://wallpaperaccess.com/full/1923258.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Le Quiz Des Jeux Olympiques Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">15</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+ 
+    <script>
+        const questions = [
+    {
+        question: "Quand ont eu lieu les premiers Jeux Olympiques de l'ère moderne ?",
+        answers: ["1896", "1900", "1924", "1948"],
+        correctAnswer: "1896"
+    },
+    {
+        question: "Qui a fondé les Jeux Olympiques modernes ?",
+        answers: ["Thomas Bach", "Pierre de Coubertin", "Juan Antonio Samaranch", "Avery Brundage"],
+        correctAnswer: "Pierre de Coubertin"
+    },
+    {
+        question: "Dans quelle ville les Jeux Olympiques d'été se sont-ils déroulés deux fois au cours du 20e siècle ?",
+        answers: ["Londres", "Paris", "Los Angeles", "Berlin"],
+        correctAnswer: "Londres"
+    },
+    {
+        question: "Quel pays a remporté le plus de médailles d'or olympiques de tous les temps ?",
+        answers: ["États-Unis", "Union soviétique", "Chine", "Allemagne"],
+        correctAnswer: "États-Unis"
+    },
+    {
+        question: "Quel athlète a remporté le plus de médailles d'or olympiques en individuel ?",
+        answers: ["Michael Phelps", "Usain Bolt", "Mark Spitz", "Carl Lewis"],
+        correctAnswer: "Michael Phelps"
+    },
+    {
+        question: "Quel sport a été introduit aux Jeux Olympiques d'été en 1984 ?",
+        answers: ["Tennis", "Football", "Basketball", "Volleyball"],
+        correctAnswer: "Tennis"
+    },
+    {
+        question: "Quel pays a accueilli les premiers Jeux Olympiques d'hiver ?",
+        answers: ["Norvège", "Suisse", "Autriche", "France"],
+        correctAnswer: "France"
+    },
+    {
+        question: "Quel athlète a allumé la flamme olympique lors des Jeux Olympiques d'été de 2016 à Rio de Janeiro ?",
+        answers: ["Pelé", "Neymar", "Ronaldo", "Romário"],
+        correctAnswer: "Neymar"
+    },
+    {
+        question: "Quel pays a été exclu des Jeux Olympiques d'été de 1980 et 1984 ?",
+        answers: ["Allemagne de l'Est", "Afrique du Sud", "Union soviétique", "États-Unis"],
+        correctAnswer: "Afrique du Sud"
+    },
+    {
+        question: "Combien de fois les Jeux Olympiques ont-ils été annulés ?",
+        answers: ["1", "2", "3", "Aucune fois"],
+        correctAnswer: "3"
+    },
+    {
+        question: "Qui a remporté la première médaille d'or olympique en athlétisme féminin ?",
+        answers: ["Fanny Blankers-Koen", "Betty Robinson", "Stanisława Walasiewicz", "Helene Mayer"],
+        correctAnswer: "Betty Robinson"
+    },
+    {
+        question: "Quel pays a remporté le plus grand nombre de médailles aux Jeux Olympiques d'hiver ?",
+        answers: ["Norvège", "États-Unis", "Allemagne", "Canada"],
+        correctAnswer: "Norvège"
+    },
+    {
+        question: "Quel sport a été ajouté au programme olympique en 1992 ?",
+        answers: ["Badminton", "Baseball", "Softball", "Tennis de table"],
+        correctAnswer: "Badminton"
+    },
+    {
+        question: "Qui a remporté la première médaille d'or olympique en natation pour le Japon ?",
+        answers: ["Kosuke Kitajima", "Daiya Seto", "Koji Ueno", "Takeshi Hirose"],
+        correctAnswer: "Koji Ueno"
+    },
+    {
+        question: "Quel pays a accueilli les Jeux Olympiques d'hiver à trois reprises ?",
+        answers: ["France", "Suisse", "États-Unis", "Italie"],
+        correctAnswer: "États-Unis"
+    },
+    {
+        question: "Quel athlète a remporté le plus grand nombre de médailles olympiques en gymnastique ?",
+        answers: ["Larisa Latynina", "Simone Biles", "Vitaly Scherbo", "Michael Phelps"],
+        correctAnswer: "Larisa Latynina"
+    },
+    {
+        question: "Quel pays a remporté la première médaille d'or olympique en football ?",
+        answers: ["Brésil", "Uruguay", "Argentine", "Grande-Bretagne"],
+        correctAnswer: "Grande-Bretagne"
+    },
+    {
+        question: "Quel athlète a remporté la première médaille d'or olympique en judo ?",
+        answers: ["Tadahiro Nomura", "Anton Geesink", "David Douillet", "Teddy Riner"],
+        correctAnswer: "Anton Geesink"
+    },
+    {
+        question: "Quel athlète a remporté le plus grand nombre de médailles olympiques de tous les temps ?",
+        answers: ["Michael Phelps", "Usain Bolt", "Larisa Latynina", "Carl Lewis"],
+        correctAnswer: "Michael Phelps"
+    },
+    {
+        question: "Quel sport a été ajouté au programme olympique lors des Jeux olympiques d'été de 2020 à Tokyo ?",
+        answers: ["Baseball/Softball", "Karaté", "Surf", "Escalade sportive"],
+        correctAnswer: "Escalade sportive"
+    }
+];
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results2.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

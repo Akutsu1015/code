@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      place-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+
+    #background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+ filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+}
+.container {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
+ 
+h5 {
+  color: #0d8602;
+  text-align: center;
+   
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto; 
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 12px 10px 8px black;
+}
+
+h5 {
+  transition: transform 0.3s ease-in-out;
+}
+
+h5:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+ span {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+ }
+
+.question:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+ 
+h5 {
+  margin-top: 30px;
+  border: 2px solid #000000;
+}
+
+
+
+.yellowstone {
+  color: #FFD700;
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 15px 10px 8px black;
+}
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop id="background-video">
+    <source src="../IT.mp4" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+  </video>
+  
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / <span id="total-questions"></span> 20</h1>
+
+  <a href="quiz_it.html">Revenir au quiz</a>
+</div>
+  <script>
+    // Récupère le score final de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const finalScore = urlParams.get('score');
+
+    // Affiche le score final
+    document.getElementById('final-score').innerText = finalScore;
+  </script>
+
+
+<h1 class="yellowstone">Voici les réponses :</h1>
+
+<div class="containers">
+
+<h5><span>Quelle est la différence entre une pile et un tas en programmation informatique ?</span> - Une pile suit le principe LIFO (dernier entré, premier sorti) et un tas suit le principe FIFO (premier entré, premier sorti)</h5>
+ <h5><span>Quel est le nom de l'algorithme utilisé pour rechercher un élément dans un tableau trié en utilisant une approche de division et de conquête ?</span> - Algorithme de recherche dichotomique</h5>
+ <h5><span>Quel est le nom de la technique utilisée pour convertir une expression algébrique en une forme plus simple en utilisant des règles algébriques ?</span> - Simplification d'expression algébrique</h5>
+  <h5><span>Quel est le nom du modèle de conception utilisé pour représenter les relations entre les classes et leurs attributs dans un système orienté objet ?</span> - Diagramme de classe</h5>
+   <h5><span>Quel est le nom du protocole utilisé pour transférer des fichiers entre un client et un serveur sur un réseau TCP/IP ?</span> - FTP (File Transfer Protocol)</h5>
+    <h5><span>Quel est le nom de la technique utilisée pour optimiser les requêtes SQL en utilisant des index ?</span> - Indexation de base de données</h5>
+     <h5><span>Quel est le nom de la technique utilisée pour évaluer la performance d'un algorithme en fonction de la taille de l'entrée ?</span> - Analyse d'algorithme</h5>
+      <h5><span>Quel est le nom de la structure de données utilisée pour stocker des données de manière à permettre une recherche rapide en utilisant une clé ?</span> - Table de hachage</h5>
+       <h5><span>Quel est le nom de la technique utilisée pour décomposer un problème complexe en sous-problèmes plus simples dans le but de le résoudre de manière récursive ?</span> - Diviser pour régner</h5>
+       <h5><span>Quel est le nom de la technique utilisée pour vérifier la validité d'un programme informatique en utilisant des preuves formelles ?</span> - Vérification de programme</h5>
+        <h5><span>Quel est le nom de la technique utilisée pour écrire du code informatique qui peut être exécuté sur différents types de plateformes ?</span> - Programmation multiplateforme</h5>
+        <h5><span>Quel est le nom de la technique utilisée pour protéger les données en utilisant des clés cryptographiques ?</span> - Chiffrement de données</h5>
+         <h5><span>Quel est le nom de la technique utilisée pour stocker des données dans une base de données en utilisant des tables liées entre elles ?</span> - Modèle relationnel</h5>
+          <h5><span>Quel est le nom de la technique utilisée pour optimiser les performances d'un système informatique en utilisant des algorithmes d'équilibrage de charge ?</span> - Équilibrage de charge</h5>
+           <h5><span>Quel est le nom de la technique utilisée pour créer des interfaces utilisateur interactives en utilisant des composants réutilisables ?</span> - Développement web</h5> <h5><span>Quel est le nom de la technique utilisée pour tester automatiquement des logiciels en utilisant des scripts pré-écrits ?</span> - Test automatisé</h5>
+            <h5><span>Quel est le nom de la technique utilisée pour stocker des données dans une base de données en utilisant des clés uniques ?</span> - Indexation de base de données</h5> <h5><span>Quel est le nom de la technique utilisée pour optimiser les performances d'un site web en utilisant des techniques de mise en cache ?</span> - Mise en cache de site web</h5>
+
+ 
+</div>
+
+</body>
+</html>

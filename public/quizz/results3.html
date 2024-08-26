@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <style>
+   body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      place-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+
+    #background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+ filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+}
+.container {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
+ 
+h5 {
+  color: #0d8602;
+  text-align: center;
+   
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto; 
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 12px 10px 8px black;
+}
+
+h5 {
+  transition: transform 0.3s ease-in-out;
+}
+
+h5:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+ span {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+ }
+
+.question:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+ 
+h5 {
+  margin-top: 30px;
+  border: 2px solid #000000;
+}
+
+
+
+.yellowstone {
+  color: #FFD700;
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 15px 10px 8px black;
+}
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop id="background-video">
+    <source src="../HP.mp4" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+  </video>
+  
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / <span id="total-questions"></span> 40</h1>
+
+  <a href="quiz_film.html">Revenir au quiz</a>
+</div>
+  <script>
+    // Récupère le score final de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const finalScore = urlParams.get('score');
+
+    // Affiche le score final
+    document.getElementById('final-score').innerText = finalScore;
+  </script>
+<h1 class="yellowstone">Voici les réponses :</h1>
+
+<div class="containers">
+<h5><span>Qui a réalisé le film 'Le Parrain' ?</span> - Francis Ford Coppola</h5>
+<h5><span>Dans quel film Marlon Brando a-t-il joué le rôle de Terry Malloy ?</span> - Sur les quais</h5>
+<h5><span>Qui a joué le rôle de Forrest Gump dans le film du même nom ?</span> - Tom Hanks</h5>
+<h5><span>Dans quel film Harrison Ford a-t-il joué le rôle d'Indiana Jones pour la première fois ?</span> - Les Aventuriers de l'arche perdue</h5>
+<h5><span>Qui a réalisé le film 'Pulp Fiction' ?</span> - Quentin Tarantino</h5>
+<h5><span>Dans quel film Robert De Niro a-t-il joué le rôle de Travis Bickle ?</span> - Taxi Driver</h5>
+<h5><span>Qui a joué le rôle de James Bond dans le film 'Dr. No' ?</span> - Sean Connery</h5>
+<h5><span>Dans quel film Audrey Hepburn a-t-elle joué le rôle de Holly Golightly ?</span> - Diamants sur canapé</h5>
+<h5><span>Qui a réalisé le film 'Inception' ?</span> - Christopher Nolan</h5>
+<h5><span>Dans quel film Marilyn Monroe a-t-elle joué le rôle de Sugar Kane Kowalczyk ?</span> - Certains l'aiment chaud</h5>
+<h5><span>Qui a joué le rôle de Jack Torrance dans le film 'Shining' ?</span> - Jack Nicholson</h5>
+<h5><span>Dans quel film Charlton Heston a-t-il joué le rôle de George Taylor ?</span> - La Planète des singes</h5>
+<h5><span>Qui a réalisé le film 'Le Seigneur des anneaux : La Communauté de l'anneau' ?</span> - Peter Jackson</h5>
+<h5><span>Dans quel film Humphrey Bogart a-t-il joué le rôle de Rick Blaine ?</span> - Casablanca</h5>
+<h5><span>Qui a joué le rôle de Tony Stark dans le film 'Iron Man' ?</span> - Robert Downey Jr.</h5>
+<h5><span>Dans quel film Orson Welles a-t-il joué le rôle de Charles Foster Kane ?</span> - Citizen Kane</h5>
+<h5><span>Qui a réalisé le film 'Le Silence des agneaux' ?</span> - Jonathan Demme</h5>
+<h5><span>Dans quel film Meryl Streep a-t-elle joué le rôle de Margaret Thatcher ?</span> - La Dame de fer</h5>
+<h5><span>Qui a joué le rôle de Michael Corleone dans le film 'Le Parrain' ?</span> - Al Pacino</h5>
+<h5><span>Dans quel film Alfred Hitchcock a-t-il réalisé la scène de la douche ?</span> - Psychose</h5>
+<h5><span>Qui a réalisé le film 'La Liste de Schindler' ?</span> - Steven Spielberg</h5>
+<h5><span>Dans quel film Tom Cruise a-t-il joué le rôle de Maverick ?</span> - Top Gun</h5>
+<h5><span>Qui a joué le rôle de Hannibal Lecter dans le film 'Le Silence des agneaux' ?</span> - Anthony Hopkins</h5>
+<h5><span>Dans quel film Clint Eastwood a-t-il joué le rôle de l'inspecteur Harry Callahan ?</span> - L'Inspecteur Harry</h5>
+<h5><span>Qui a réalisé le film 'Titanic' ?</span> - James Cameron</h5>
+<h5><span>Dans quel film Bruce Willis a-t-il joué le rôle de John McClane ?</span> - Die Hard</h5>
+<h5><span>Qui a joué le rôle de Don Vito Corleone dans le film 'Le Parrain' ?</span> - Marlon Brando</h5>
+<h5><span>Dans quel film Woody Allen a-t-il joué le rôle d'Alvy Singer ?</span> - Annie Hall</h5>
+<h5><span>Qui a réalisé le film 'La La Land' ?</span> - Damien Chazelle</h5>
+<h5><span>Dans quel film Sigourney Weaver a-t-elle joué le rôle de Ellen Ripley ?</span> - Alien</h5>
+<h5><span>Qui a joué le rôle de Norman Bates dans le film 'Psychose' ?</span> - Anthony Perkins</h5>
+<h5><span>Dans quel film John Wayne a-t-il joué le rôle de Ethan Edwards ?</span> - La Prisonnière du désert</h5>
+<h5><span>Qui a réalisé le film 'Les Dents de la mer' ?</span> - Steven Spielberg</h5>
+<h5><span>Dans quel film Judy Garland a-t-elle joué le rôle de Dorothy Gale ?</span> - Le Magicien d'Oz</h5>
+<h5><span>Qui a joué le rôle de Rocky Balboa dans le film 'Rocky' ?</span> - Sylvester Stallone</h5>
+<h5><span>Dans quel film Stanley Kubrick a-t-il réalisé la scène de l'hôtel Overlook ?</span> - Shining</h5>
+<h5><span>Qui a réalisé le film 'Forrest Gump' ?</span> - Robert Zemeckis</h5>
+<h5><span>Dans quel film Cary Grant a-t-il joué le rôle de Roger Thornhill ?</span> - La Mort aux trousses</h5>
+<h5><span>Qui a joué le rôle de Batman dans le film 'Batman Begins' ?</span> - Christian Bale</h5>
+<h5><span>Dans quel film Faye Dunaway a-t-elle joué le rôle de Diana Christensen ?</span> - Network</h5>
+</div>
+</body>
+</html>

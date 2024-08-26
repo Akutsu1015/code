@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de science</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://wallpaperaccess.com/full/658991.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz : Histoire du Football <br> Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">15</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+question: "Qui a marqué le premier but de l'histoire de la Coupe du Monde de la FIFA en 1930 ?",
+answers: ["Pele", "Diego Maradona", "Luis Monti", "Guillermo Stabile"],
+correctAnswer: "Luis Monti"
+},
+{
+question: "Quel est le seul joueur à avoir remporté la Coupe du Monde de la FIFA avec trois équipes nationales différentes ?",
+answers: ["Franz Beckenbauer", "Pele", "Diego Maradona", "Alfredo Di Stefano"],
+correctAnswer: "Alfredo Di Stefano"
+},
+{
+question: "Quel club de football a remporté le plus de titres de championnat d'Angleterre ?",
+answers: ["Manchester United", "Liverpool", "Arsenal", "Chelsea"],
+correctAnswer: "Manchester United"
+},
+{
+question: "Quel est le nom de la première compétition internationale de football, organisée en 1872 ?",
+answers: ["Coupe du Monde de la FIFA", "Championnat d'Europe de l'UEFA", "Coupe des Confédérations de la FIFA", "Coupe de l'Association britannique de football"],
+correctAnswer: "Coupe de l'Association britannique de football"
+},
+{
+question: "Quel est le nom du premier joueur de football professionnel en Angleterre, en 1885 ?",
+answers: ["Fergus Suter", "Arthur Kinnaird", "William McGregor", "Charles Alcock"],
+correctAnswer: "Fergus Suter"
+},
+{
+question: "Quel est le nom de la première femme à avoir joué dans une équipe de football masculine professionnelle, en 1969 ?",
+answers: ["Mia Hamm", "Abby Wambach", "Marta", "Patricia Barcyk"],
+correctAnswer: "Patricia Barcyk"
+},
+{
+question: "Quel est le nom du premier joueur de football africain à avoir remporté le Ballon d'Or, en 1995 ?",
+answers: ["Didier Drogba", "Samuel Eto'o", "Yaya Toure", "George Weah"],
+correctAnswer: "George Weah"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Ligue des Champions de l'UEFA trois fois de suite, entre 1974 et 1976 ?",
+answers: ["Real Madrid", "Barcelone", "Bayern Munich", "Ajax Amsterdam"],
+correctAnswer: "Bayern Munich"
+},
+{
+question: "Quel est le nom du premier joueur de football à avoir marqué un but lors d'une finale de Coupe du Monde de la FIFA, en 1930 ?",
+answers: ["Pele", "Diego Maradona", "Zinedine Zidane", "Guillermo Stabile"],
+correctAnswer: "Guillermo Stabile"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA en dehors de son propre continent, en 1958 ?",
+answers: ["Brésil", "Allemagne", "Argentine", "Espagne"],
+correctAnswer: "Brésil"
+},
+{
+question: "Quel est le nom du premier joueur de football à avoir remporté le Ballon d'Or et la Coupe du Monde de la FIFA la même année, en 1958 ?",
+answers: ["Pele", "Diego Maradona", "Lionel Messi", "Didier Drogba"],
+correctAnswer: "Pele"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe d'Afrique des Nations, en 1957 ?",
+answers: ["Egypte", "Cameroun", "Côte d'Ivoire", "Ghana"],
+correctAnswer: "Egypte"
+},
+{
+question: "Quel est le nom du premier joueur de football à avoir marqué plus de 1000 buts dans sa carrière, en 1969 ?",
+answers: ["Pele", "Diego Maradona", "Lionel Messi", "Cristiano Ronaldo"],
+correctAnswer: "Pele"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA avec un joueur noir dans son équipe, en 1958 ?",
+answers: ["Brésil", "France", "Etats-Unis", "Afrique du Sud"],
+correctAnswer: "Brésil"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA avec un joueur asiatique dans son équipe, en 2002 ?",
+answers: ["Japon", "Corée du Sud", "Chine", "Arabie Saoudite"],
+correctAnswer: "Japon"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA avec un joueur d'Amérique centrale dans son équipe, en 1978 ?",
+answers: ["Mexique", "Costa Rica", "Honduras", "Panama"],
+correctAnswer: "Mexique"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA avec un joueur d'Océanie dans son équipe, en 2014 ?",
+answers: ["Australie", "Nouvelle-Zélande", "Fidji", "Papouasie-Nouvelle-Guinée"],
+correctAnswer: "Australie"
+},
+{
+question: "Quel est le nom de la première équipe de football à avoir remporté la Coupe du Monde de la FIFA avec un joueur d'Amérique du Nord dans son équipe, en 1990 ?",
+answers: ["Etats-Unis", "Canada", "Jamaïque", "Haïti"],
+correctAnswer: "Etats-Unis"
+}
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results6.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+[
+    {
+        "userAgent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/127.0.0.0 Safari\/537.36",
+        "platform": "Win32",
+        "language": "fr-FR",
+        "languages": [
+            "fr-FR",
+            "fr",
+            "en-US",
+            "en"
+        ],
+        "cookieEnabled": true,
+        "doNotTrack": "1",
+        "screenWidth": 2560,
+        "screenHeight": 1440,
+        "location": "http:\/\/localhost\/letrokeur.shop\/public\/",
+        "referrer": "http:\/\/localhost\/letrokeur.shop\/",
+        "timezone": "Europe\/Paris",
+        "javaEnabled": false,
+        "online": true,
+        "vendor": "Google Inc.",
+        "product": "Gecko",
+        "appName": "Netscape",
+        "appVersion": "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/127.0.0.0 Safari\/537.36",
+        "deviceMemory": 8,
+        "hardwareConcurrency": 8,
+        "maxTouchPoints": 0,
+        "networkInformation": {
+            "downlink": 8.25,
+            "effectiveType": "4g",
+            "rtt": 100,
+            "saveData": false
+        },
+        "plugins": [
+            "PDF Viewer",
+            "Chrome PDF Viewer",
+            "Chromium PDF Viewer",
+            "Microsoft Edge PDF Viewer",
+            "WebKit built-in PDF"
+        ]
+    }
+]

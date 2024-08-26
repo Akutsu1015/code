@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Informatique</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: orangered;
+    }
+    .background {
+        background-image: url('https://img.freepik.com/photos-gratuite/puce-informatique-connecte-composants-electriques-alimentant-industrie-mondiale-communications-generee-par-intelligence-artificielle_24877-80915.jpg?w=1060&t=st=1718939093~exp=1718939693~hmac=e3448cd52b14fcabdc7739def5c1f0d6368bbeceac5f00e040e36fe373ed532f');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz :  Science Niveau <span id="max">Intermediare</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">30</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+        question: "Quelle est la plus grande planète de notre système solaire ?",
+    answers: ["Saturne", "Jupiter", "Neptune", "Uranus"],
+    correctAnswer: "Jupiter"
+  },
+  {
+    question: "Quel est le principal gaz constituant l'atmosphère terrestre ?",
+    answers: ["Oxygène", "Dioxyde de carbone", "Hydrogène", "Azote"],
+    correctAnswer: "Azote"
+  },
+  {
+    question: "Qui a découvert la loi de la gravitation universelle ?",
+    answers: ["Galilée", "Isaac Newton", "Albert Einstein", "Nikola Tesla"],
+    correctAnswer: "Isaac Newton"
+  },
+  {
+    question: "Quel scientifique est connu pour sa théorie de la relativité ?",
+    answers: ["Marie Curie", "Isaac Newton", "Albert Einstein", "Galilée"],
+    correctAnswer: "Albert Einstein"
+  },
+  {
+    question: "Quelle est la molécule de base de l'ADN ?",
+    answers: ["Protéine", "Glucose", "Nucléotide", "Lipide"],
+    correctAnswer: "Nucléotide"
+  },
+  {
+    question: "Quel est l'organe principal du système circulatoire humain ?",
+    answers: ["Poumons", "Cœur", "Foie", "Reins"],
+    correctAnswer: "Cœur"
+  },
+  {
+    question: "Quel est l'état physique de la matière à une température de 0 Kelvin ?",
+    answers: ["Liquide", "Solide", "Gazeux", "Condensat de Bose-Einstein"],
+    correctAnswer: "Condensat de Bose-Einstein"
+  },
+  {
+    question: "Quel est le nom de la particule découverte par le CERN en 2012, parfois appelée 'la particule de Dieu' ?",
+    answers: ["Boson de Higgs", "Quark", "Photon", "Gluon"],
+    correctAnswer: "Boson de Higgs"
+  },
+  {
+    question: "Quelle est la formule chimique du sel de table ?",
+    answers: ["NaCl", "H2O", "CO2", "C6H12O6"],
+    correctAnswer: "NaCl"
+  },
+  {
+    question: "Quel est l'animal terrestre le plus rapide du monde ?",
+    answers: ["Guépard", "Lion", "Tigre", "Léopard"],
+    correctAnswer: "Guépard"
+  }
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results5.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

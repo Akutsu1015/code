@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Informatique</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://img.freepik.com/photos-gratuite/puce-informatique-connecte-composants-electriques-alimentant-industrie-mondiale-communications-generee-par-intelligence-artificielle_24877-80915.jpg?w=1060&t=st=1718939093~exp=1718939693~hmac=e3448cd52b14fcabdc7739def5c1f0d6368bbeceac5f00e040e36fe373ed532f');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz :  Informatique Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">30</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+        question: "Que signifie l'acronyme 'LAN' ?",
+    answers: ["Local Access Network", "Local Area Network", "Large Area Network", "Local Administration Network"],
+    correctAnswer: "Local Area Network"
+  },
+  {
+    question: "Quel est le rôle principal du DNS dans le réseau informatique ?",
+    answers: ["Attribuer des adresses IP aux utilisateurs", "Gérer les pare-feu", "Traduire les noms de domaine en adresses IP", "Fournir des services cloud"],
+    correctAnswer: "Traduire les noms de domaine en adresses IP"
+  },
+  {
+    question: "Quel est le langage de requête utilisé pour interroger et manipuler les bases de données ?",
+    answers: ["SQL", "HTML", "Python", "Java"],
+    correctAnswer: "SQL"
+  },
+  {
+    question: "Que signifie l'acronyme 'BIOS' en informatique ?",
+    answers: ["Basic Input Output System", "Binary Input Output System", "Basic Internet Operating System", "Binary Internet Operating System"],
+    correctAnswer: "Basic Input Output System"
+  },
+  {
+    question: "Quel est le rôle principal d'un serveur proxy ?",
+    answers: ["Accélérer la connexion Internet", "Bloquer les publicités", "Agir comme un intermédiaire entre un utilisateur et l'Internet", "Optimiser les performances du CPU"],
+    correctAnswer: "Agir comme un intermédiaire entre un utilisateur et l'Internet"
+  },
+  {
+    question: "Quel est le nom de l'architecture réseau utilisée par Internet ?",
+    answers: ["Client-Serveur", "Pair-à-Pair", "Mainframe", "Cloud"],
+    correctAnswer: "Client-Serveur"
+  },
+  {
+    question: "Quel est le rôle d'un routeur dans un réseau informatique ?",
+    answers: ["Connecter des périphériques à un réseau", "Traduire les adresses IP privées en adresses IP publiques", "Transmettre des paquets de données entre des réseaux", "Fournir des adresses IP dynamiques"],
+    correctAnswer: "Transmettre des paquets de données entre des réseaux"
+  },
+  {
+    question: "Que signifie l'acronyme 'VPN' ?",
+    answers: ["Virtual Private Network", "Virtual Public Network", "Virtual Protected Network", "Virtual Physical Network"],
+    correctAnswer: "Virtual Private Network"
+  },
+  {
+    question: "Quel est le terme utilisé pour décrire la protection des données contre tout accès non autorisé ?",
+    answers: ["Confidentialité", "Intégrité", "Disponibilité", "Sécurité"],
+    correctAnswer: "Confidentialité"
+  },
+  {
+    question: "Que signifie l'acronyme 'HTTP' ?",
+    answers: ["HyperText Transfer Protocol", "Hyper Transfer Text Protocol", "Hyper Transmission Text Protocol", "HyperText Transmission Protocol"],
+    correctAnswer: "HyperText Transfer Protocol"
+  },
+  {
+    question: "Quel est le rôle principal d'un système de gestion de base de données (SGBD) ?",
+    answers: ["Gérer les fichiers", "Gérer les bases de données", "Gérer les périphériques", "Gérer les utilisateurs"],
+    correctAnswer: "Gérer les bases de données"
+  },
+  {
+    question: "Quel est le format de compression de fichiers le plus courant pour les documents ?",
+    answers: ["ZIP", "RAR", "TAR", "7z"],
+    correctAnswer: "ZIP"
+  },
+  {
+    question: "Quel est le terme pour un logiciel qui collecte secrètement des informations sur l'utilisateur ?",
+    answers: ["Spyware", "Virus", "Worm", "Trojan"],
+    correctAnswer: "Spyware"
+  },
+  {
+    question: "Que signifie l'acronyme 'HTTPS' ?",
+    answers: ["HyperText Transfer Protocol Secure", "HyperText Transfer Protocol Simple", "HyperText Transmission Protocol Secure", "HyperText Transfer Secure Protocol"],
+    correctAnswer: "HyperText Transfer Protocol Secure"
+  },
+  {
+    question: "Quel est l'acronyme pour le réseau sans fil utilisé pour interconnecter des appareils électroniques ?",
+    answers: ["Wi-Fi", "LAN", "WAN", "MAN"],
+    correctAnswer: "Wi-Fi"
+  },
+  {
+    question: "Que signifie l'acronyme 'OS' ?",
+    answers: ["Operating System", "Operating Software", "Operational System", "Operational Software"],
+    correctAnswer: "Operating System"
+  },
+  {
+    question: "Quel est le rôle principal du pare-feu en sécurité informatique ?",
+    answers: ["Protéger contre les virus", "Gérer les utilisateurs", "Bloquer le trafic réseau non autorisé", "Optimiser les performances du réseau"],
+    correctAnswer: "Bloquer le trafic réseau non autorisé"
+  },
+  {
+    question: "Quel est le terme pour décrire un logiciel malveillant qui exige une rançon ?",
+    answers: ["Virus", "Ransomware", "Worm", "Spyware"],
+    correctAnswer: "Ransomware"
+  },
+  {
+    question: "Quel type de mémoire est utilisée pour stocker temporairement les données pendant le traitement par le CPU ?",
+    answers: ["RAM", "ROM", "SSD", "HDD"],
+    correctAnswer: "RAM"
+  },
+  {
+    question: "Quel est le terme utilisé pour un réseau privé virtuel sécurisé ?",
+    answers: ["VPN", "LAN", "WAN", "MAN"],
+    correctAnswer: "VPN"
+  }
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results5.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

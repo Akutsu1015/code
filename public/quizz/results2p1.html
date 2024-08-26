@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  background-color: #000;
+  min-height: 100vh; /* Assure que le body prend toute la hauteur de la fenêtre */
+  display: flex;
+  flex-direction: column; /* Arrange les éléments en colonne */
+  align-items: center; /* Centre horizontalement */
+  justify-content: center; /* Centre verticalement */
+  position: relative; /* Pour superposer la vidéo et le contenu */
+  overflow: hidden; /* Empêche le débordement */
+  overflow-x: hidden;
+  overflow-y: auto; /* Active le scroll vertical */
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+a:hover {
+  background-color: #0056b3;
+}
+
+.container {
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 800px;
+}
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-item {
+  min-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #222;
+  color: white;
+  text-align: center;
+}
+
+.carousel-item h5 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.carousel-item span {
+  display: block;
+  font-size: 1.5rem;
+  color: #ff6b6b;
+  margin-top: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.carousel-dot {
+  width: 15px;
+  height: 15px;
+  background-color: #555;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carousel-dot.active {
+  background-color: #ff6b6b;
+}
+
+.carousel-nav button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 2; /* Assure que les boutons sont au-dessus du contenu */
+  padding: 0 10px;
+}
+
+.carousel-nav button:hover {
+  color: #ff6b6b;
+}
+
+.carousel-nav {
+ 
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none; /* Désactive les événements pour éviter d'empêcher les interactions */
+}
+
+.carousel-nav button {
+  pointer-events: all; /* Active les événements sur les boutons seulement */
+}
+
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh; /* 30% de la hauteur de la page */
+  z-index: -1; /* Place la vidéo derrière le contenu */
+  overflow: hidden;
+}
+
+#background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+/* Media Queries pour rendre la page responsive */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 30px;
+    max-width: 700px;
+  }
+
+  .carousel-item h5 {
+    font-size: 1.6rem;
+  }
+
+  .carousel-item span {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    max-width: 600px;
+  }
+
+  .carousel-item h5 {
+    font-size: 1.4rem;
+  }
+
+  .carousel-item span {
+    font-size: 1.2rem;
+  }
+
+  .carousel-nav button {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+    width: 95%;
+    max-width: 400px;
+    height: auto; /* Permet à la page de s'étendre si nécessaire */
+    overflow: visible; /* Assure que le contenu déborde correctement */
+  }
+
+  .carousel-item {
+        padding: 10px;  /* Réduisez le padding pour éviter que le contenu déborde */
+    }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-item h5 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-item span {
+    font-size: 1rem;
+  }
+
+  a {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .carousel-nav button {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+  .carousel-track {
+    flex-direction: row; /* Maintient les éléments en ligne */
+    width: 100%; /* Assure que le track prend toute la largeur */
+  }
+}
+
+
+  </style>
+</head>
+<body>
+   
+  <div class="video-container">
+    <video autoplay muted loop id="background-video">
+        <source src="../videos/JO.mp4" type="video/mp4">
+        Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+    </video>
+</div>
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / 20</h1>
+  <h2>Vos réponses :</h2>
+  <ul id="answers-list"></ul>
+  <a href="quiz-JO.html">Revenir au quiz</a>
+
+  <div class="carousel">
+    <div class="carousel-track">
+        <div class="carousel-item">
+            <h5>Quand ont eu lieu les premiers Jeux Olympiques de l'ère moderne ?</h5>
+            <span>1896</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Qui a fondé les Jeux Olympiques modernes ?</h5>
+            <span>Pierre de Coubertin</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Dans quelle ville les Jeux Olympiques d'été se sont-ils déroulés deux fois au cours du 20e siècle ?</h5>
+            <span>Londres</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a remporté le plus de médailles d'or olympiques de tous les temps ?</h5>
+            <span>États-Unis</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel athlète a remporté le plus de médailles d'or olympiques en individuel ?</h5>
+            <span>Michael Phelps</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel sport a été introduit aux Jeux Olympiques d'été en 1984 ?</h5>
+            <span>Tennis</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a accueilli les premiers Jeux Olympiques d'hiver ?</h5>
+            <span>France</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel athlète a allumé la flamme olympique lors des Jeux Olympiques d'été de 2016 à Rio de Janeiro ?</h5>
+            <span>Neymar</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a été exclu des Jeux Olympiques d'été de 1980 et 1984 ?</h5>
+            <span>Afrique du Sud</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Combien de fois les Jeux Olympiques ont-ils été annulés ?</h5>
+            <span>3</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Qui a remporté la première médaille d'or olympique en athlétisme féminin ?</h5>
+            <span>Betty Robinson</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a remporté le plus grand nombre de médailles aux Jeux Olympiques d'hiver ?</h5>
+            <span>Norvège</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel sport a été ajouté au programme olympique en 1992 ?</h5>
+            <span>Badminton</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Qui a remporté la première médaille d'or olympique en natation pour le Japon ?</h5>
+            <span>Koji Ueno</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a accueilli les Jeux Olympiques d'hiver à trois reprises ?</h5>
+            <span>États-Unis</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel athlète a remporté le plus grand nombre de médailles olympiques en gymnastique ?</h5>
+            <span>Larisa Latynina</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel pays a remporté la première médaille d'or olympique en football ?</h5>
+            <span>Grande-Bretagne</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel athlète a remporté la première médaille d'or olympique en judo ?</h5>
+            <span>Anton Geesink</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel athlète a remporté le plus grand nombre de médailles olympiques de tous les temps ?</h5>
+            <span>Michael Phelps</span>
+        </div>
+        <div class="carousel-item">
+            <h5>Quel sport a été ajouté au programme olympique lors des Jeux olympiques d'été de 2020 à Tokyo ?</h5>
+            <span>Escalade sportive</span>
+        </div>
+    </div>
+  </div>
+  <div class="carousel-nav">
+    <button id="prev">&#10094;</button>
+    <button id="next">&#10095;</button>
+  </div>
+  <div class="carousel-dots">
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+    <span class="carousel-dot"></span>
+  </div>
+</div>
+
+<script>
+  
+   const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('#next');
+const prevButton = document.querySelector('#prev');
+const dotsNav = document.querySelector('.carousel-dots');
+const dots = Array.from(dotsNav.children);
+const slideWidth = slides[0].getBoundingClientRect().width;
+
+let currentIndex = 0;
+
+const setSlidePosition = (slide, index) => {
+    slide.style.left = slideWidth * index + 'px';
+};
+
+slides.forEach(setSlidePosition);
+
+const moveToSlide = (track, currentSlide, targetSlide) => {
+    track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+    currentSlide.classList.remove('current-slide');
+    targetSlide.classList.add('current-slide');
+};
+
+const updateDots = (currentDot, targetDot) => {
+    currentDot.classList.remove('active');
+    targetDot.classList.add('active');
+};
+
+const moveToNextSlide = () => {
+    const currentSlide = track.querySelector('.current-slide') || slides[0];
+    const nextSlide = currentSlide.nextElementSibling || slides[0];
+    const currentDot = dotsNav.querySelector('.active') || dots[0];
+    const nextDot = currentDot.nextElementSibling || dots[0];
+
+    moveToSlide(track, currentSlide, nextSlide);
+    updateDots(currentDot, nextDot);
+};
+
+const moveToPrevSlide = () => {
+    const currentSlide = track.querySelector('.current-slide') || slides[0];
+    const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1];
+    const currentDot = dotsNav.querySelector('.active') || dots[0];
+    const prevDot = currentDot.previousElementSibling || dots[dots.length - 1];
+
+    moveToSlide(track, currentSlide, prevSlide);
+    updateDots(currentDot, prevDot);
+};
+
+nextButton.addEventListener('click', moveToNextSlide);
+prevButton.addEventListener('click', moveToPrevSlide);
+
+dotsNav.addEventListener('click', e => {
+    const targetDot = e.target.closest('span');
+
+    if (!targetDot) return;
+
+    const currentSlide = track.querySelector('.current-slide') || slides[0];
+    const currentDot = dotsNav.querySelector('.active') || dots[0];
+    const targetIndex = dots.findIndex(dot => dot === targetDot);
+    const targetSlide = slides[targetIndex];
+
+    moveToSlide(track, currentSlide, targetSlide);
+    updateDots(currentDot, targetDot);
+});
+
+setInterval(moveToNextSlide, 30000); // Auto défilement tous les 5 secondes 
+
+// Swipe functionality
+let startX;
+let isSwiping = false;
+
+track.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+    isSwiping = true;
+});
+
+track.addEventListener('touchmove', (event) => {
+    if (!isSwiping) return;
+    const moveX = event.touches[0].clientX - startX;
+    track.style.transform = `translateX(${moveX}px)`;
+});
+
+track.addEventListener('touchend', (event) => {
+    isSwiping = false;
+    const moveX = event.changedTouches[0].clientX - startX;
+    if (moveX < -50) {
+        moveToNextSlide(); // Passe au slide suivant si le mouvement est suffisant
+    } else if (moveX > 50) {
+        moveToPrevSlide(); // Passe au slide précédent si le mouvement est suffisant
+    } else {
+        track.style.transform = ''; // Remet le slide à sa position initiale si le mouvement est faible
+    }
+});
+
+// Récupère le score final et les réponses de l'URL
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const finalScore = urlParams.get('score');
+const answers = JSON.parse(decodeURIComponent(urlParams.get('answers')));
+
+// Affiche le score final
+document.getElementById('final-score').innerText = finalScore;
+
+// Affiche les réponses
+const answersList = document.getElementById('answers-list');
+answers.forEach(answer => {
+    const li = document.createElement('li');
+    li.textContent = `Question : ${answer.question} - Votre réponse : ${answer.answer}`;
+    answersList.appendChild(li);
+});
+
+</script>
+</body>
+</html>

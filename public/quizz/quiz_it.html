@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Informatique</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://img.freepik.com/photos-gratuite/puce-informatique-connecte-composants-electriques-alimentant-industrie-mondiale-communications-generee-par-intelligence-artificielle_24877-80915.jpg?w=1060&t=st=1718939093~exp=1718939693~hmac=e3448cd52b14fcabdc7739def5c1f0d6368bbeceac5f00e040e36fe373ed532f');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz :  Informatique Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">30</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+question: "Quelle est la différence entre une pile et un tas en programmation informatique ?",
+answers: ["Une pile suit le principe LIFO (dernier entré, premier sorti) et un tas suit le principe FIFO (premier entré, premier sorti)", "Une pile suit le principe FIFO (premier entré, premier sorti) et un tas suit le principe LIFO (dernier entré, premier sorti)", "Une pile et un tas sont des structures de données équivalentes", "Une pile est utilisée pour stocker des données temporaires et un tas est utilisé pour stocker des données permanentes"],
+correctAnswer: "Une pile suit le principe LIFO (dernier entré, premier sorti) et un tas suit le principe FIFO (premier entré, premier sorti)"
+},
+{
+question: "Quel est le nom de l'algorithme utilisé pour rechercher un élément dans un tableau trié en utilisant une approche de division et de conquête ?",
+answers: ["Algorithme de tri rapide", "Algorithme de tri fusion", "Algorithme de recherche dichotomique", "Algorithme de recherche linéaire"],
+correctAnswer: "Algorithme de recherche dichotomique"
+},
+{
+question: "Quel est le nom de la technique utilisée pour convertir une expression algébrique en une forme plus simple en utilisant des règles algébriques ?",
+answers: ["Simplification d'expression algébrique", "Réduction d'expression algébrique", "Factorisation d'expression algébrique", "Développement d'expression algébrique"],
+correctAnswer: "Simplification d'expression algébrique"
+},
+{
+question: "Quel est le nom du modèle de conception utilisé pour représenter les relations entre les classes et leurs attributs dans un système orienté objet ?",
+answers: ["Diagramme de classe", "Diagramme de séquence", "Diagramme d'état", "Diagramme d'activité"],
+correctAnswer: "Diagramme de classe"
+},
+{
+question: "Quel est le nom du protocole utilisé pour transférer des fichiers entre un client et un serveur sur un réseau TCP/IP ?",
+answers: ["HTTP", "FTP", "SMTP", "POP3"],
+correctAnswer: "FTP"
+},
+{
+question: "Quel est le nom de l'algorithme utilisé pour trier un tableau en utilisant une approche de division et de conquête en comparant les éléments deux à deux ?",
+answers: ["Algorithme de tri rapide", "Algorithme de tri fusion", "Algorithme de tri à bulles", "Algorithme de tri par sélection"],
+correctAnswer: "Algorithme de tri rapide"
+},
+{
+question: "Quel est le nom de la technique utilisée pour optimiser les requêtes SQL en utilisant des index ?",
+answers: ["Optimisation de requête SQL", "Indexation de base de données", "Partitionnement de base de données", "Normalisation de base de données"],
+correctAnswer: "Indexation de base de données"
+},
+{
+question: "Quel est le nom de la technique utilisée pour évaluer la performance d'un algorithme en fonction de la taille de l'entrée ?",
+answers: ["Analyse d'algorithme", "Évaluation de la complexité", "Optimisation d'algorithme", "Test d'algorithme"],
+correctAnswer: "Analyse d'algorithme"
+},
+{
+question: "Quel est le nom de la structure de données utilisée pour stocker des données de manière à permettre une recherche rapide en utilisant une clé ?",
+answers: ["Tableau", "Liste chaînée", "Table de hachage", "Arbre binaire de recherche"],
+correctAnswer: "Table de hachage"
+},
+{
+question: "Quel est le nom de la technique utilisée pour décomposer un problème complexe en sous-problèmes plus simples dans le but de le résoudre de manière récursive ?",
+answers: ["Diviser pour régner", "Programmation dynamique", "Algorithme glouton", "Recherche exhaustive"],
+correctAnswer: "Diviser pour régner"
+},
+{
+question: "Quel est le nom de la technique utilisée pour vérifier la validité d'un programme informatique en utilisant des preuves formelles ?",
+answers: ["Vérification de programme", "Test de programme", "Débogage de programme", "Optimisation de programme"],
+correctAnswer: "Vérification de programme"
+},
+{
+question: "Quel est le nom de la technique utilisée pour écrire du code informatique qui peut être exécuté sur différents types de plateformes ?",
+answers: ["Programmation orientée objet", "Programmation fonctionnelle", "Programmation multiplateforme", "Programmation procédurale"],
+correctAnswer: "Programmation multiplateforme"
+},
+{
+question: "Quel est le nom de la technique utilisée pour protéger les données en utilisant des clés cryptographiques ?",
+answers: ["Chiffrement de données", "Compression de données", "Codage de données", "Hachage de données"],
+correctAnswer: "Chiffrement de données"
+},
+{
+question: "Quel est le nom de la technique utilisée pour stocker des données dans une base de données en utilisant des tables liées entre elles ?",
+answers: ["Modèle relationnel", "Modèle hiérarchique", "Modèle réseau", "Modèle objet"],
+correctAnswer: "Modèle relationnel"
+},
+{
+question: "Quel est le nom de la technique utilisée pour optimiser les performances d'un système informatique en utilisant des algorithmes d'équilibrage de charge ?",
+answers: ["Optimisation de système", "Équilibrage de charge", "Partitionnement de système", "Réplication de système"],
+correctAnswer: "Équilibrage de charge"
+},
+{
+question: "Quel est le nom de la technique utilisée pour créer des interfaces utilisateur interactives en utilisant des composants réutilisables ?",
+answers: ["Développement web", "Développement d'applications mobiles", "Développement d'applications desktop", "Développement de jeux vidéo"],
+correctAnswer: "Développement web"
+},
+{
+question: "Quel est le nom de la technique utilisée pour tester automatiquement des logiciels en utilisant des scripts pré-écrits ?",
+answers: ["Test manuel", "Test automatisé", "Test unitaire", "Test d'intégration"],
+correctAnswer: "Test automatisé"
+},
+{
+question: "Quel est le nom de la technique utilisée pour stocker des données dans une base de données en utilisant des clés uniques ?",
+answers: ["Indexation de base de données", "Normalisation de base de données", "Partitionnement de base de données", "Clustering de base de données"],
+correctAnswer: "Indexation de base de données"
+},
+{
+question: "Quel est le nom de la technique utilisée pour optimiser les performances d'un site web en utilisant des techniques de mise en cache ?",
+answers: ["Optimisation de site web", "Mise en cache de site web", "Compression de site web", "Minification de site web"],
+correctAnswer: "Mise en cache de site web"
+}
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results5.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

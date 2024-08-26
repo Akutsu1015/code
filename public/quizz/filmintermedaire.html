@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Informatique</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: orangered;
+    }
+    .background {
+        background-image: url('https://img.freepik.com/photos-gratuite/puce-informatique-connecte-composants-electriques-alimentant-industrie-mondiale-communications-generee-par-intelligence-artificielle_24877-80915.jpg?w=1060&t=st=1718939093~exp=1718939693~hmac=e3448cd52b14fcabdc7739def5c1f0d6368bbeceac5f00e040e36fe373ed532f');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz :  Film Niveau <span id="max">Intermediaire</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">30</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+        question: "Quel réalisateur est connu pour ses films 'Inception', 'Interstellar' et 'Dunkerque' ?",
+    answers: ["Steven Spielberg", "Christopher Nolan", "Quentin Tarantino", "James Cameron"],
+    correctAnswer: "Christopher Nolan"
+  },
+  {
+    question: "Quel film de Quentin Tarantino met en scène un duo de criminels nommé Vincent Vega et Jules Winnfield ?",
+    answers: ["Kill Bill", "Pulp Fiction", "Reservoir Dogs", "Jackie Brown"],
+    correctAnswer: "Pulp Fiction"
+  },
+  {
+    question: "Quel est le film qui a remporté le plus d'Oscars de l'histoire ?",
+    answers: ["Le Seigneur des Anneaux : Le Retour du Roi", "Titanic", "Ben-Hur", "Tous en scène"],
+    correctAnswer: "Le Seigneur des Anneaux : Le Retour du Roi"
+  },
+  {
+    question: "Quelle actrice a remporté l'Oscar de la meilleure actrice pour son rôle dans 'La La Land' ?",
+    answers: ["Emma Stone", "Jennifer Lawrence", "Natalie Portman", "Charlize Theron"],
+    correctAnswer: "Emma Stone"
+  },
+  {
+    question: "Quel film d'animation de 1994 a été remanié en version live-action en 2019 ?",
+    answers: ["Aladdin", "Le Roi Lion", "Mulan", "Dumbo"],
+    correctAnswer: "Le Roi Lion"
+  },
+  {
+    question: "Quel film de guerre de 1998, réalisé par Steven Spielberg, met en scène Tom Hanks ?",
+    answers: ["Pearl Harbor", "Apocalypse Now", "Il faut sauver le soldat Ryan", "Platoon"],
+    correctAnswer: "Il faut sauver le soldat Ryan"
+  },
+  {
+    question: "Quel film de science-fiction réalisé par Stanley Kubrick est considéré comme un chef-d'œuvre du genre ?",
+    answers: ["Blade Runner", "2001, l'Odyssée de l'espace", "Matrix", "Star Wars"],
+    correctAnswer: "2001, l'Odyssée de l'espace"
+  },
+  {
+    question: "Dans quel film Tom Hanks se retrouve-t-il seul sur une île déserte après un crash d'avion ?",
+    answers: ["Naufragé", "Seul au monde", "Survivant", "Into the Wild"],
+    correctAnswer: "Seul au monde"
+  },
+  {
+    question: "Quel film raconte l'histoire vraie d'un mathématicien atteint de schizophrénie ?",
+    answers: ["Un homme d'exception", "Le Discours d'un roi", "La Liste de Schindler", "Will Hunting"],
+    correctAnswer: "Un homme d'exception"
+  },
+  {
+    question: "Quel film met en scène un super-héros milliardaire ayant conçu une armure technologique pour combattre le crime ?",
+    answers: ["Iron Man", "Batman", "Spider-Man", "Ant-Man"],
+    correctAnswer: "Iron Man"
+  }
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results5.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

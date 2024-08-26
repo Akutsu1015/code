@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      place-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+
+    #background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+ filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+}
+.container {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
+ 
+h5 {
+  color: #0d8602;
+  text-align: center;
+   
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto; 
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 12px 10px 8px black;
+}
+
+h5 {
+  transition: transform 0.3s ease-in-out;
+}
+
+h5:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+ span {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+ }
+
+.question:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+ 
+h5 {
+  margin-top: 30px;
+  border: 2px solid #000000;
+}
+
+
+
+.yellowstone {
+  color: #FFD700;
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 15px 10px 8px black;
+}
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop id="background-video">
+    <source src="../foot.mp4" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+  </video>
+  
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / <span id="total-questions"></span> / 20</h1>
+
+  <a href="quiz_foot.html">Revenir au quiz</a>
+</div>
+  <script>
+    // Récupère le score final de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const finalScore = urlParams.get('score');
+
+    // Affiche le score final
+    document.getElementById('final-score').innerText = finalScore;
+  </script>
+
+
+<h1 class="yellowstone">Voici les réponses :</h1>
+
+<div class="containers">
+
+ <h5><span>Quel est le club de football qui a remporté le plus de fois la Ligue des champions de l'UEFA ?</span> - Real Madrid</h5>
+  <h5><span>Qui est le joueur de football ayant inscrit le plus grand nombre de buts en une seule saison de championnat ?</span> - Lionel Messi</h5>
+   <h5><span>Quel est le pays qui a remporté le plus de fois la Coupe du monde de football ?</span> - Brésil</h5>
+    <h5><span>Qui est le joueur de football ayant remporté le plus de fois le Ballon d'or ?</span> - Lionel Messi</h5>
+     <h5><span>Quel est le club de football qui a remporté le plus de fois le championnat d'Angleterre ?</span> - Manchester United</h5>
+      <h5><span>Qui est le joueur de football ayant inscrit le plus grand nombre de buts en Coupe du monde ?</span> - Miroslav Klose</h5>
+       <h5><span>Quel est le club de football qui a remporté le plus de fois la Copa Libertadores ?</span> - Independiente</h5>
+        <h5><span>Qui est le joueur de football ayant joué le plus grand nombre de matchs en équipe nationale ?</span> - Ahmed Hassan</h5>
+         <h5><span>Quel est le club de football qui a remporté le plus de fois la Ligue Europa de l'UEFA ?</span> - Seville FC</h5>
+          <h5><span>Qui est le joueur de football ayant remporté le plus de fois le Soulier d'or européen ?</span> - Lionel Messi</h5>
+           <h5><span>Quel est le pays qui a remporté le plus de fois le Championnat d'Europe de football ?</span> - Allemagne et Espagne (3 fois chacun)</h5>
+            <h5><span>Qui est le joueur de football ayant inscrit le plus grand nombre de buts en Ligue des champions de l'UEFA ?</span> - Cristiano Ronaldo</h5>
+             <h5><span>Quel est le club de football qui a remporté le plus de fois le championnat d'Italie ?</span> - Juventus</h5>
+              <h5><span>Qui est le joueur de football ayant remporté le plus de fois la Ligue des champions de l'UEFA ?</span> - Francisco Gento</h5>
+              <h5><span>Quel est le club de football qui a remporté le plus de fois le championnat de France ?</span> - Saint-Étienne</h5>
+               <h5><span>Qui est le joueur de football ayant inscrit le plus grand nombre de buts en une seule saison de Ligue des champions de l'UEFA ?</span> - Cristiano Ronaldo</h5>
+                <h5><span>Quel est le pays qui a remporté le plus de fois la Coupe d'Afrique des nations ?</span> - Égypte</h5>
+                 <h5><span>Qui est le joueur de football ayant inscrit le plus grand nombre de buts en équipe nationale en une seule année ?</span> - Lionel Messi</h5>
+                  <h5><span>Quel est le club de football qui a remporté le plus de fois la Coupe intercontinentale ?</span> - Real Madrid</h5>
+</div>
+
+</body>
+</html>

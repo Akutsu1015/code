@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de science</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://wallpapercave.com/wp/wp4430827.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz :  Scientifique Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+      <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">15</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+    const questions = [
+    {
+        question: "Qui a découvert la pénicilline ?",
+        answers: ["Alexander Fleming", "Louis Pasteur", "Robert Koch", "Edward Jenner"],
+        correctAnswer: "Alexander Fleming"
+    },
+    {
+        question: "Quel est le gaz le plus abondant dans l'atmosphère terrestre ?",
+        answers: ["Oxygène", "Azote", "Hydrogène", "Dioxyde de carbone"],
+        correctAnswer: "Azote"
+    },
+    {
+        question: "Qui a développé la théorie de la relativité générale ?",
+        answers: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Stephen Hawking"],
+        correctAnswer: "Albert Einstein"
+    },
+    {
+        question: "Quel est le plus grand organe du corps humain ?",
+        answers: ["Cœur", "Foie", "Peau", "Poumons"],
+        correctAnswer: "Peau"
+    },
+    {
+        question: "Quel est le nom de la planète naine qui a été reclassée en 2006 ?",
+        answers: ["Pluton", "Cérès", "Éris", "Makémaké"],
+        correctAnswer: "Pluton"
+    },
+    {
+        question: "Quel est le nom de l'élément chimique de numéro atomique 1 ?",
+        answers: ["Hydrogène", "Hélium", "Oxygène", "Carbone"],
+        correctAnswer: "Hydrogène"
+    },
+    {
+        question: "Quel est le nom de la plus grande structure de l'univers ?",
+        answers: ["Galaxie", "Amas de galaxies", "Superamas de galaxies", "Univers observable"],
+        correctAnswer: "Univers observable"
+    },
+    {
+        question: "Qui a inventé le télescope ?",
+        answers: ["Galileo Galilei", "Isaac Newton", "Johannes Kepler", "Nicolas Copernic"],
+        correctAnswer: "Galileo Galilei"
+    },
+    {
+        question: "Quel est le nom du processus par lequel les plantes vertes produisent leur nourriture ?",
+        answers: ["Respiration", "Photosynthèse", "Fermentation", "Transpiration"],
+        correctAnswer: "Photosynthèse"
+    },
+    {
+        question: "Quel est le nom de la couche la plus externe de la Terre ?",
+        answers: ["Croûte terrestre", "Manteau", "Noyau externe", "Noyau interne"],
+        correctAnswer: "Croûte terrestre"
+    },
+    {
+        question: "Quel est le nom du scientifique qui a découvert la loi de la gravitation universelle ?",
+        answers: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Stephen Hawking"],
+        correctAnswer: "Isaac Newton"
+    },
+    {
+        question: "Quel est le nom de la molécule qui transporte l'oxygène dans le sang ?",
+        answers: ["Hémoglobine", "Globule blanc", "Globule rouge", "Plasma"],
+        correctAnswer: "Hémoglobine"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les tremblements de terre ?",
+        answers: ["Sismologie", "Volcanologie", "Météorologie", "Géologie"],
+        correctAnswer: "Sismologie"
+    },
+    {
+        question: "Quel est le nom de la théorie qui décrit la structure de l'atome ?",
+        answers: ["Théorie de la relativité", "Théorie quantique", "Théorie cinétique des gaz", "Théorie de l'évolution"],
+        correctAnswer: "Théorie quantique"
+    },
+    {
+        question: "Quel est le nom de l'instrument utilisé pour mesurer la pression atmosphérique ?",
+        answers: ["Baromètre", "Thermomètre", "Hygromètre", "Anémomètre"],
+        correctAnswer: "Baromètre"
+    },
+    {
+        question: "Quel est le nom de la force qui maintient les planètes en orbite autour du soleil ?",
+        answers: ["Force de gravité", "Force électromagnétique", "Force nucléaire forte", "Force nucléaire faible"],
+        correctAnswer: "Force de gravité"
+    },
+    {
+        question: "Quel est le nom de la partie de l'œil qui permet de voir les couleurs ?",
+        answers: ["Cornée", "Iris", "Rétine", "Cristallin"],
+        correctAnswer: "Rétine"
+    },
+    {
+        question: "Quel est le nom de l'élément chimique le plus léger ?",
+        answers: ["Hydrogène", "Hélium", "Oxygène", "Carbone"],
+        correctAnswer: "Hydrogène"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les fossiles ?",
+        answers: ["Paléontologie", "Archéologie", "Anthropologie", "Géologie"],
+        correctAnswer: "Paléontologie"
+    },
+    {
+        question: "Quel est le nom de la théorie qui décrit l'évolution des espèces ?",
+        answers: ["Théorie de la relativité", "Théorie quantique", "Théorie de l'évolution", "Théorie cinétique des gaz"],
+        correctAnswer: "Théorie de l'évolution"
+    },
+    {
+        question: "Quel est le nom de la partie du cerveau responsable de la mémoire à court terme ?",
+        answers: ["Hippocampe", "Cervelet", "Thalamus", "Hypothalamus"],
+        correctAnswer: "Hippocampe"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les étoiles et les galaxies ?",
+        answers: ["Astronomie", "Astrophysique", "Cosmologie", "Planétologie"],
+        correctAnswer: "Astronomie"
+    },
+    {
+        question: "Quel est le nom de la théorie qui décrit la structure de l'univers ?",
+        answers: ["Théorie de la relativité", "Théorie quantique", "Théorie du Big Bang", "Théorie des cordes"],
+        correctAnswer: "Théorie du Big Bang"
+    },
+    {
+        question: "Quel est le nom de la partie de la cellule responsable de la production d'énergie ?",
+        answers: ["Noyau", "Mitochondrie", "Ribosome", "Chloroplaste"],
+        correctAnswer: "Mitochondrie"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie le comportement animal ?",
+        answers: ["Éthologie", "Zoologie", "Biologie", "Écologie"],
+        correctAnswer: "Éthologie"
+    },
+    {
+        question: "Quel est le nom de la force qui permet aux avions de voler ?",
+        answers: ["Force de gravité", "Force électromagnétique", "Force de portance", "Force de traînée"],
+        correctAnswer: "Force de portance"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les météorites ?",
+        answers: ["Météorologie", "Astronomie", "Géologie", "Planétologie"],
+        correctAnswer: "Planétologie"
+    },
+    {
+        question: "Quel est le nom de la partie de l'œil qui régule la quantité de lumière qui entre ?",
+        answers: ["Cornée", "Iris", "Rétine", "Cristallin"],
+        correctAnswer: "Iris"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les volcans ?",
+        answers: ["Volcanologie", "Sismologie", "Géologie", "Météorologie"],
+        correctAnswer: "Volcanologie"
+    },
+    {
+        question: "Quel est le nom de la théorie qui décrit la structure de la matière ?",
+        answers: ["Théorie de la relativité", "Théorie quantique", "Théorie cinétique des gaz", "Théorie de l'évolution"],
+        correctAnswer: "Théorie quantique"
+    },
+    {
+        question: "Quel est le nom de la partie de la plante qui produit les graines ?",
+        answers: ["Racine", "Tige", "Feuille", "Fleur"],
+        correctAnswer: "Fleur"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les océans ?",
+        answers: ["Océanographie", "Hydrologie", "Météorologie", "Géologie"],
+        correctAnswer: "Océanographie"
+    },
+    {
+        question: "Quel est le nom de la partie du cerveau responsable du contrôle moteur ?",
+        answers: ["Cervelet", "Hippocampe", "Thalamus", "Hypothalamus"],
+        correctAnswer: "Cervelet"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les virus ?",
+        answers: ["Virologie", "Bactériologie", "Immunologie", "Épidémiologie"],
+        correctAnswer: "Virologie"
+    },
+    {
+        question: "Quel est le nom de la théorie qui décrit la formation des montagnes ?",
+        answers: ["Théorie de la tectonique des plaques", "Théorie de l'évolution", "Théorie de la relativité", "Théorie quantique"],
+        correctAnswer: "Théorie de la tectonique des plaques"
+    },
+    {
+        question: "Quel est le nom de la partie de l'ADN qui contient les informations génétiques ?",
+        answers: ["Nucléotide", "Gène", "Chromosome", "Brin d'ADN"],
+        correctAnswer: "Gène"
+    },
+    {
+        question: "Quel est le nom de la science qui étudie les tremblements de terre et les éruptions volcaniques ?",
+        answers: ["Sismologie", "Volcanologie", "Géologie", "Météorologie"],
+        correctAnswer: "Sismologie"
+    },
+    {
+        question: "Quel est le nom de la partie de l'atome qui contient les protons et les neutrons ?",
+        answers: ["Noyau", "Électron", "Proton", "Neutron"],
+        correctAnswer: "Noyau"
+    },
+   {
+question: "Quel est le nom de la partie du cerveau responsable de la coordination des mouvements volontaires ?",
+answers: ["Cervelet", "Cerveau antérieur", "Hypothalamus", "Thalamus"],
+correctAnswer: "Cervelet"
+},
+ {
+question: "Quel est le nom de la théorie qui explique la façon dont les humains évoluent en fonction de leur environnement ?",
+answers: ["Théorie de l'évolution", "Théorie de la relativité", "Théorie de la gravitation universelle", "Théorie de la sélection naturelle"],
+correctAnswer: "Théorie de l'évolution"
+}
+];
+
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results4.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

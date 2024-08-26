@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Cinématographique</title>
+    <style>
+      * {
+      box-sizing: border-box;
+      text-align: center;
+    }
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Slab', serif;
+      color: #34495e; /* Couleur du texte */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+   
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .answers {
+      list-style-type: none;
+      padding: 0;
+    }
+    .answer {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .answer:hover {
+      background-color: #f5f5f5;
+    }
+    #timer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #time-left {
+      color: #f00;
+    }
+    @media (max-width: 600px) {
+      #quiz-container {
+        padding: 20px;
+      }
+      .question {
+        font-size: 20px;
+      }
+      .answer {
+        font-size: 16px;
+      }
+    }
+    h2 {
+        color: lightseagreen;
+    }
+    h1 {
+        color: #34495e;
+        font-size: 50px;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #max {
+        color: #f00;
+    }
+    .background {
+        background-image: url('https://wallpapercave.com/wp/wp6511672.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    footer {
+         margin-top: 50px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        
+    }
+    #B {
+        color: lightseagreen;
+    }
+    #M {
+        color: rgb(242, 86, 110);
+    }
+    #T {
+        color: rgb(251, 158, 172);
+    }
+    #K {
+        color: rgb(117, 165, 220);
+    }
+
+    #start-btn {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: lightseagreen;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#start-btn:hover {
+  background-color: #34495e;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="background"></div>
+ 
+<h1>Quiz : Cimématographie Niveau <span id="max">MAX</span></h1>
+
+
+    <div class="container">
+
+        <button id="start-btn">Start</button>
+
+        <h2>c'est parti !</h2>
+        <div id="quiz-area">
+            
+        </div>
+    </div>
+    <div id="timer">Temps restant : <span id="time-left">15</span> secondes</div>
+
+
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/baptiste-mathey-779b6927a/"> <h4> <span id="B">Baptiste </span> <span id="M">Mathey</span> </h4></a></p>
+        <a href="https://letrokeur.shop"><span id="T">Annuaire de sites en streaming Gratuit</span></a>
+        <a href="../quizz/../quizz/page principal/index.html"><span id="K">Top 5 des Film à voir Absolument ! </span> </a>
+
+    </footer>
+    <script>
+        const questions = [
+    {
+        question: "Qui a réalisé le film 'Le Parrain' ?",
+        answers: ["Martin Scorsese", "Francis Ford Coppola", "Steven Spielberg", "Stanley Kubrick"],
+        correctAnswer: "Francis Ford Coppola"
+    },
+    {
+        question: "Dans quel film Marlon Brando a-t-il joué le rôle de Terry Malloy ?",
+        answers: ["Sur les quais", "Le Parrain", "Apocalypse Now", "Un tramway nommé Désir"],
+        correctAnswer: "Sur les quais"
+    },
+    {
+        question: "Qui a joué le rôle de Forrest Gump dans le film du même nom ?",
+        answers: ["Tom Hanks", "Matt Damon", "Leonardo DiCaprio", "Brad Pitt"],
+        correctAnswer: "Tom Hanks"
+    },
+    {
+        question: "Dans quel film Harrison Ford a-t-il joué le rôle d'Indiana Jones pour la première fois ?",
+        answers: ["Les Aventuriers de l'arche perdue", "Indiana Jones et le Temple maudit", "Indiana Jones et la Dernière Croisade", "Indiana Jones et le Royaume du Crâne de Cristal"],
+        correctAnswer: "Les Aventuriers de l'arche perdue"
+    },
+    {
+        question: "Qui a réalisé le film 'Pulp Fiction' ?",
+        answers: ["Quentin Tarantino", "Martin Scorsese", "Steven Spielberg", "David Lynch"],
+        correctAnswer: "Quentin Tarantino"
+    },
+    {
+        question: "Dans quel film Robert De Niro a-t-il joué le rôle de Travis Bickle ?",
+        answers: ["Taxi Driver", "Raging Bull", "Le Parrain 2", "Les Affranchis"],
+        correctAnswer: "Taxi Driver"
+    },
+    {
+        question: "Qui a joué le rôle de James Bond dans le film 'Dr. No' ?",
+        answers: ["Sean Connery", "Roger Moore", "Pierce Brosnan", "Daniel Craig"],
+        correctAnswer: "Sean Connery"
+    },
+    {
+        question: "Dans quel film Audrey Hepburn a-t-elle joué le rôle de Holly Golightly ?",
+        answers: ["Diamants sur canapé", "My Fair Lady", "Charade", "Vacances romaines"],
+        correctAnswer: "Diamants sur canapé"
+    },
+    {
+        question: "Qui a réalisé le film 'Inception' ?",
+        answers: ["Christopher Nolan", "Steven Spielberg", "James Cameron", "Ridley Scott"],
+        correctAnswer: "Christopher Nolan"
+    },
+    {
+        question: "Dans quel film Marilyn Monroe a-t-elle joué le rôle de Sugar Kane Kowalczyk ?",
+        answers: ["Certains l'aiment chaud", "Les hommes préfèrent les blondes", "Sept ans de réflexion", "La rivière sans retour"],
+        correctAnswer: "Certains l'aiment chaud"
+    },
+    {
+        question: "Qui a joué le rôle de Jack Torrance dans le film 'Shining' ?",
+        answers: ["Jack Nicholson", "Robert De Niro", "Al Pacino", "Dustin Hoffman"],
+        correctAnswer: "Jack Nicholson"
+    },
+    {
+        question: "Dans quel film Charlton Heston a-t-il joué le rôle de George Taylor ?",
+        answers: ["La Planète des singes", "Ben-Hur", "Les Dix Commandements", "Soleil vert"],
+        correctAnswer: "La Planète des singes"
+    },
+    {
+        question: "Qui a réalisé le film 'Le Seigneur des anneaux : La Communauté de l'anneau' ?",
+        answers: ["Peter Jackson", "Steven Spielberg", "James Cameron", "Ridley Scott"],
+        correctAnswer: "Peter Jackson"
+    },
+    {
+        question: "Dans quel film Humphrey Bogart a-t-il joué le rôle de Rick Blaine ?",
+        answers: ["Le Faucon maltai", "Le Faucon maltais", "Le Grand Sommeil", "Le Trésor de la Sierra Madre"],
+        correctAnswer: "Casablanca"
+    },
+    {
+        question: "Qui a joué le rôle de Tony Stark dans le film 'Iron Man' ?",
+        answers: ["Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"],
+        correctAnswer: "Robert Downey Jr."
+    },
+    {
+        question: "Dans quel film Orson Welles a-t-il joué le rôle de Charles Foster Kane ?",
+        answers: ["Le Procès", "La Soif du mal", "La Splendeur des Amberson", "Citizen Kane"],
+        correctAnswer: "Citizen Kane"
+    },
+    {
+        question: "Qui a réalisé le film 'Le Silence des agneaux' ?",
+        answers: ["Jonathan Demme", "David Fincher", "Martin Scorsese", "Stanley Kubrick"],
+        correctAnswer: "Jonathan Demme"
+    },
+    {
+        question: "Dans quel film Meryl Streep a-t-elle joué le rôle de Margaret Thatcher ?",
+        answers: ["La Dame de fer", "Le Diable s'habille en Prada", "Out of Africa", "Sophie's Choice"],
+        correctAnswer: "La Dame de fer"
+    },
+    {
+        question: "Qui a joué le rôle de Michael Corleone dans le film 'Le Parrain' ?",
+        answers: ["Al Pacino", "Marlon Brando", "Robert De Niro", "James Caan"],
+        correctAnswer: "Al Pacino"
+    },
+    {
+        question: "Dans quel film Alfred Hitchcock a-t-il réalisé la scène de la douche ?",
+        answers: ["Les Oiseaux", "Sueurs froides", "Psychose", "Fenêtre sur cour"],
+        correctAnswer: "Psychose"
+    },
+    {
+        question: "Qui a réalisé le film 'La Liste de Schindler' ?",
+        answers: ["Steven Spielberg", "Francis Ford Coppola", "Martin Scorsese", "Stanley Kubrick"],
+        correctAnswer: "Steven Spielberg"
+    },
+    {
+        question: "Dans quel film Tom Cruise a-t-il joué le rôle de Maverick ?",
+        answers: ["Rain Man", "Mission impossible", "Minority Report", "Top Gun"],
+        correctAnswer: "Top Gun"
+    },
+    {
+        question: "Qui a joué le rôle de Hannibal Lecter dans le film 'Le Silence des agneaux' ?",
+        answers: ["Anthony Hopkins", "Jodie Foster", "Ted Levine", "Scott Glenn"],
+        correctAnswer: "Anthony Hopkins"
+    },
+    {
+        question: "Dans quel film Clint Eastwood a-t-il joué le rôle de l'inspecteur Harry Callahan ?",
+        answers: ["L'Inspecteur Harry", "Impitoyable", "Le Bon, la Brute et le Truand", "Gran Torino"],
+        correctAnswer: "L'Inspecteur Harry"
+    },
+    {
+        question: "Qui a réalisé le film 'Titanic' ?",
+        answers: ["Peter Jackson", "Steven Spielberg", "Ridley Scott",  "James Cameron"],
+        correctAnswer: "James Cameron"
+    },
+    {
+        question: "Dans quel film Bruce Willis a-t-il joué le rôle de John McClane ?",
+        answers: ["Le Cinquième Élément", "Pulp Fiction", "Die Hard", "Sin City"],
+        correctAnswer: "Die Hard"
+    },
+    {
+        question: "Qui a joué le rôle de Don Vito Corleone dans le film 'Le Parrain' ?",
+        answers: ["Robert De Niro", "Al Pacino", "Marlon Brando", "James Caan"],
+        correctAnswer: "Marlon Brando"
+    },
+    {
+        question: "Dans quel film Woody Allen a-t-il joué le rôle d'Alvy Singer ?",
+        answers: ["Annie Hall", "Manhattan", "Hannah et ses sœurs", "Crimes et Délits"],
+        correctAnswer: "Annie Hall"
+    },
+    {
+        question: "Qui a réalisé le film 'La La Land' ?",
+        answers: ["Damien Chazelle", "Quentin Tarantino", "David Fincher", "Wes Anderson"],
+        correctAnswer: "Damien Chazelle"
+    },
+    {
+        question: "Dans quel film Sigourney Weaver a-t-elle joué le rôle de Ellen Ripley ?",
+        answers: ["Gorrilles dans la brume", "Avatar", "Ghostbusters", "Alien"],
+        correctAnswer: "Alien"
+    },
+    {
+        question: "Qui a joué le rôle de Norman Bates dans le film 'Psychose' ?",
+        answers: ["Anthony Perkins", "Alfred Hitchcock", "Janet Leigh", "Vera Miles"],
+        correctAnswer: "Anthony Perkins"
+    },
+    {
+        question: "Dans quel film John Wayne a-t-il joué le rôle de Ethan Edwards ?",
+        answers: ["Rio Bravo", "La Prisonnière du désert", "Le Jour le plus long", "True Grit"],
+        correctAnswer: "La Prisonnière du désert"
+    },
+    {
+        question: "Qui a réalisé le film 'Les Dents de la mer' ?",
+        answers: ["Steven Spielberg", "George Lucas", "Francis Ford Coppola", "Martin Scorsese"],
+        correctAnswer: "Steven Spielberg"
+    },
+    {
+        question: "Dans quel film Judy Garland a-t-elle joué le rôle de Dorothy Gale ?",
+        answers: ["Chantons sous la pluie", "Une étoile est née", "Le Magicien d'Oz", "La Valse dans l'ombre"],
+        correctAnswer: "Le Magicien d'Oz"
+    },
+    {
+        question: "Qui a joué le rôle de Rocky Balboa dans le film 'Rocky' ?",
+        answers: ["Al Pacino", "Robert De Niro", "Sylvester Stallone", "Arnold Schwarzenegger"],
+        correctAnswer: "Sylvester Stallone"
+    },
+    {
+        question: "Dans quel film Stanley Kubrick a-t-il réalisé la scène de l'hôtel Overlook ?",
+        answers: ["Orange mécanique", "2001 : L'Odyssée de l'espace", "Shining", "Full Metal Jacket"],
+        correctAnswer: "Shining"
+    },
+    {
+        question: "Qui a réalisé le film 'Forrest Gump' ?",
+        answers: ["Robert Zemeckis", "Steven Spielberg", "Frank Darabont", "Ron Howard"],
+        correctAnswer: "Robert Zemeckis"
+    },
+    {
+        question: "Dans quel film Cary Grant a-t-il joué le rôle de Roger Thornhill ?",
+        answers: ["La Mort aux trousses", "Indiscrétions", "Charade", "L'Impossible Monsieur Bébé"],
+        correctAnswer: "La Mort aux trousses"
+    },
+    {
+        question: "Qui a joué le rôle de Batman dans le film 'Batman Begins' ?",
+        answers: ["Christian Bale", "Michael Keaton", "Val Kilmer", "George Clooney"],
+        correctAnswer: "Christian Bale"
+    },
+    {
+        question: "Dans quel film Faye Dunaway a-t-elle joué le rôle de Diana Christensen ?",
+        answers: ["Les Trois Jours du Condor", "Bonnie et Clyde", "Chinatown", "Network"],
+        correctAnswer: "Network"
+    }
+];
+
+
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerId;
+let score = 0;
+
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  showQuestion();
+});
+
+function showQuestion() {
+  const questionArea = document.getElementById("quiz-area");
+  questionArea.innerHTML = `
+    <div class="question">${questions[currentQuestion].question}</div>
+    <ul class="answers">
+      ${questions[currentQuestion].answers.map((answer, index) => `
+        <li class="answer" data-index="${index}">${answer}</li>
+      `).join("")}
+    </ul>
+  `;
+
+  timeLeft = 30;
+  document.getElementById("time-left").innerText = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time-left").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function nextQuestion() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    // Quiz terminé, redirige vers la page de résultats
+    const url = 'results3.html?score=' + score;
+    window.location.href = url;
+  }
+}
+
+function updateScore(isCorrect) {
+  if (isCorrect) {
+    score++;
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('answer')) {
+    const selectedAnswer = event.target.innerText;
+    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
+
+    updateScore(isCorrect); // Ajoutez cette ligne
+
+    nextQuestion();
+  }
+});
+    </script>
+</body>
+</html>

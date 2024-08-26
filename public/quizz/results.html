@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="../../src/output.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      place-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+
+    #background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+ filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+}
+.container {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
+ 
+h5 {
+  color: #0d8602;
+  text-align: center;
+   
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto; 
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 12px 10px 8px black;
+}
+
+h5 {
+  transition: transform 0.3s ease-in-out;
+}
+
+h5:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+
+.question {
+  
+  transition: transform 0.3s ease-out;
+  color: rgb(215, 5, 5);
+}
+
+.question:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+ 
+h5 {
+  margin-top: 30px;
+  border: 2px solid #000000;
+}
+
+
+
+.yellowstone {
+  color: #FFD700;
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 15px 10px 8px black;
+}
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop id="background-video">
+    <source src="../mickey.mp4" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+  </video>
+  
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / <span id="total-questions"></span> 40</h1>
+
+  <a href="quizz_Disney.html">Revenir au quiz</a>
+</div>
+  <script>
+    // Récupère le score final de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const finalScore = urlParams.get('score');
+
+    // Affiche le score final
+    document.getElementById('final-score').innerText = finalScore;
+  </script>
+
+<h1 class="yellowstone">Voici les réponses :</h1>
+<div class="containers">
+<h5><span class="question">"comment s'appelle la petite copine de mickey ?"</span> - "Minnie"</h5>
+<h5><span class="question">"Dans 'La Petite Sirène', quel est le nom du prince qu'Ariel sauve de la noyade ?"</span> - "Éric"</h5>
+<h5><span class="question">"Dans 'Aladdin', quel est le nom du perroquet de Jafar ?"</span> - "Yago"</h5>
+<h5><span class="question">"Dans 'Le Roi Lion', quel est le nom de la tante de Scar ?"</span> - "Zira"</h5>
+<h5><span class="question">"Dans 'La Belle et la Bête', quel est le nom du village où vit Belle ?"</span> - "Villeneuve"</h5>
+<h5><span class="question">"Dans 'Cendrillon', quel est le nom du chat de Lady Tremaine ?"</span> - "Figaro"</h5>
+<h5><span class="question">"Dans 'Pocahontas', quel est le nom du raton laveur ami de Pocahontas ?"</span> - "Meeko"</h5>
+<h5><span class="question">"Dans 'Le Bossu de Notre-Dame', quel est le nom du capitaine des gardes ?"</span> - "Phoebus"</h5>
+<h5><span class="question">"Dans 'Mulan', quel est le nom du dragon qui accompagne Mulan ?"</span> - "Mushu"</h5>
+<h5><span class="question">"Dans 'Tarzan', quel est le nom de la gorille qui adopte Tarzan ?"</span> - "Kala"</h5>
+<h5><span class="question">"Dans 'Hercules', quel est le nom du cheval ailé d'Hercules ?"</span> - "Pégase"</h5>
+<h5><span class="question">"Dans 'Kuzco, l'empereur mégalo', quel est le nom du conseiller de Kuzco qui se transforme en panthère ?"</span> - "Yzma"</h5>
+<h5><span class="question">"Dans 'Atlantide, l'empire perdu', quel est le nom du cristal qui celebrite Atlantis ?"</span> - "Cœur de l'Atlantide"</h5>
+<h5><span class="question">"Dans 'Lilo et Stitch', quel est le numéro d'expérience de Stitch ?"</span> - "626"</h5>
+<h5><span class="question">"Dans 'La Planète au trésor', quel est le nom du robot qui accompagne Jim Hawkins ?"</span> - "B.E.N."</h5>
+<h5><span class="question">"Dans 'Frère des ours', quel est le nom du frère aîné de Kenai qui se transforme en ours ?"</span> - "Sitka"</h5>
+<h5><span class="question">"Dans 'Vaiana, la légende du bout du monde', quel est le nom du demi-dieu du vent et de la mer ?"</span> - "Maui"</h5>
+<h5><span class="question">"Dans 'Coco', quel est le nom du chien de la famille Rivera ?"</span> - "Dante"</h5>
+<h5><span class="question">"Dans 'Raiponce', quel est le nom du cheval de Flynn Rider ?"</span> - "Maximus"</h5>
+<h5><span class="question">"Dans 'Les Mondes de Ralph', quel est le nom du jeu vidéo où vit Vanellope von Schweetz ?"</span> - "Sugar Rush"</h5>
+<h5><span class="question">"Dans 'La Reine des neiges', quel est le nom des trolls qui ont élevé Kristoff ?"</span> - "Bulda"</h5>
+<h5><span class="question">"Dans 'Zootopie', quel est le nom de la renarde, héroïne du film ?"</span> - "Judy Hopps"</h5>
+<h5><span class="question">"Dans 'Vice-versa', quel est le nom de l'émotion principale de Riley ?"</span> - "Joie"</h5>
+<h5><span class="question">"Dans 'Moana', quel est le nom de la grand-mère de Moana ?"</span> - "Tala"</h5>
+<h5><span class="question">"Dans 'Cars', quel est le nom de la ville où se déroule la majorité de l'histoire ?"</span> - "Radiator Springs"</h5>
+<h5><span class="question">"Dans 'Ratatouille', quel est le nom du critique gastronomique ?"</span> - "Anton Ego"</h5>
+<h5><span class="question">"Dans 'WALL-E', quel est le nom du vaisseau spatial qui abrite les humains ?"</span> - "Axiom"</h5>
+<h5><span class="question">"Dans 'Là-haut', quel est le nom de la maison de Carl et Ellie ?"</span> - "Paradise Falls"</h5>
+<h5><span class="question">"Dans 'Le Voyage d'Arlo', quel est le nom de l'humain adopté par Arlo ?"</span> - "Spot"</h5>
+<h5><span class="question">"Dans 'Vaiana, la légende du bout du monde', quel est le nom du coq qui accompagne Vaiana ?"</span> - "Heihei"</h5>
+<h5><span class="question">"Dans 'Les Indestructibles', quel est le nom du super-vilain que la famille Parr affronte ?"</span> - "Syndrome"</h5>
+<h5><span class="question">"Dans 'Rebelle', quel est le nom du royaume où vit Mérida ?"</span> - "DunBroch"</h5>
+<h5><span class="question">"Dans 'Les Aristochats', quel est le nom de la chatte mère ?"</span> - "Duchesse"</h5>
+<h5><span class="question">"Dans 'Peter Pan', quel est le nom du crocodile qui a mangé la main de Capitaine Crochet ?"</span> - "Tic-Tac"</h5>
+<h5><span class="question">"Dans 'La Princesse et la Grenouille', quel est le nom du prince transformé en grenouille ?"</span> - "Naveen"</h5>
+<h5><span class="question">"Dans 'Le Livre de la Jungle', quel est le nom du serpent qui aide Mowgli ?"</span> - "Kaa"</h5>
+<h5><span class="question">"Dans 'Robin des Bois', quel est le nom du prince qui devient roi à la fin du film ?"</span> - "Prince Richard"</h5>
+<h5><span class="question">"Dans 'Les 101 Dalmatiens', quel est le nom de la méchante qui veut faire un manteau de fourrure avec les chiots ?"</span> - "Cruella"</h5>
+<h5><span class="question">"Dans 'La Belle au bois dormant', quel est le nom de la fée qui protège Aurore ?"</span> - "Merryweather"</h5>
+<h5><span class="question">"Dans 'Alice au pays des merveilles', quel est le nom du chat qui sourit ?"</span> - "Cheshire"</h5>
+<h5><span class="question">"Dans 'Les Aristochats', quel est le nom de la chatte mère ?"</span> - "Duchesse"</h5>
+<h5><span class="question">"Dans 'Peter Pan', quel est le nom du crocodile qui a mangé la main de Capitaine Crochet ?"</span> - "Tic-Tac"</h5>
+<h5><span class="question">"Dans 'La Princesse et la Grenouille', quel est le nom du prince transformé en grenouille ?"</span> - "Naveen"</h5>
+<h5><span class="question">"Dans 'Le Livre de la Jungle', quel est le nom du serpent qui aide Mowgli ?"</span> - "Kaa"</h5>
+<h5><span class="question">"Dans 'Robin des Bois', quel est le nom du prince qui devient roi à la fin du film ?"</span> - "Prince Richard"</h5>
+<h5><span class="question">"Dans 'Les 101 Dalmatiens', quel est le nom de la méchante qui veut faire un manteau de fourrure avec les chiots ?"</span> - "Cruella"</h5>
+<h5><span class="question">"Dans 'La Belle au bois dormant', quel est le nom de la fée qui protège Aurore ?"</span> - "Merryweather"</h5>
+<h5><span class="question">"Dans 'Alice au pays des merveilles', quel est le nom du chat qui sourit ?"</span> - "Cheshire"</h5>
+<h5><span class="question">"Dans 'Les Aristochats', quel est le nom de la chatte mère ?"</span> - "Duchesse"</h5>
+<h5><span class="question">"Dans 'Peter Pan', quel est le nom du crocodile qui a mangé la main de Capitaine Crochet ?"</span> - "Tic-Tac"</h5>
+<h5><span class="question">"Dans 'La Princesse et la Grenouille', quel est le nom du prince transformé en grenouille ?"</span> - "Naveen"</h5>
+</div>
+</body>
+</html>

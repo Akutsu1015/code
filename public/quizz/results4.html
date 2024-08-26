@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats du Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      place-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+
+    #background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+ filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+}
+.container {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h5 {
+  margin-top: 20px;
+}
+
+ 
+h5 {
+  color: #0d8602;
+  text-align: center;
+   
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto; 
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  box-shadow: 12px 10px 8px black;
+}
+
+h5 {
+  transition: transform 0.3s ease-in-out;
+}
+
+h5:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+ span {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+ }
+
+.question:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+ 
+h5 {
+  margin-top: 30px;
+  border: 2px solid #000000;
+}
+
+
+
+.yellowstone {
+  color: #FFD700;
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 15px 10px 8px black;
+}
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop id="background-video">
+    <source src="../spaces.mp4" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+  </video>
+  
+
+<div class="container">
+  <h1>Votre score final est : <span id="final-score"></span> / <span id="total-questions"></span> 40</h1>
+
+  <a href="quiz-science.html">Revenir au quiz</a>
+</div>
+  <script>
+    // Récupère le score final de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const finalScore = urlParams.get('score');
+
+    // Affiche le score final
+    document.getElementById('final-score').innerText = finalScore;
+  </script>
+
+
+<h1 class="yellowstone">Voici les réponses :</h1>
+
+<div class="containers">
+
+<h5><span>Qui a découvert la pénicilline ?</span> - Alexander Fleming</h5>
+<h5><span>Quel est le gaz le plus abondant dans l'atmosphère terrestre ?</span> - Azote</h5>
+<h5><span>Qui a développé la théorie de la relativité générale ?</span> - Albert Einstein</h5>
+<h5><span>Quel est le plus grand organe du corps humain ?</span> - Peau</h5>
+<h5><span>Quel est le nom de la planète naine qui a été reclassée en 2006 ?</span> - Pluton</h5>
+<h5><span>Quel est le nom de l'élément chimique de numéro atomique 1 ?</span> - Hydrogène</h5>
+<h5><span>Quel est le nom de la plus grande structure de l'univers ?</span> - Univers observable</h5>
+<h5><span>Qui a inventé le télescope ?</span> - Galileo Galilei</h5>
+<h5><span>Quel est le nom du processus par lequel les plantes vertes produisent leur nourriture ?</span> - Photosynthèse</h5>
+<h5><span>Quel est le nom de la couche la plus externe de la Terre ?</span> - Croûte terrestre</h5>
+<h5><span>Quel est le nom du scientifique qui a découvert la loi de la gravitation universelle ?</span> - Isaac Newton</h5>
+<h5><span>Quel est le nom de la molécule qui transporte l'oxygène dans le sang ?</span> - Hémoglobine</h5>
+<h5><span>Quel est le nom de la science qui étudie les tremblements de terre ?</span> - Sismologie</h5>
+<h5><span>Quel est le nom de la théorie qui décrit la structure de l'atome ?</span> - Théorie quantique</h5>
+<h5><span>Quel est le nom de l'instrument utilisé pour mesurer la pression atmosphérique ?</span> - Baromètre</h5>
+<h5><span>Quel est le nom de la force qui maintient les planètes en orbite autour du soleil ?</span> - Force de gravité</h5>
+<h5><span>Quel est le nom de la partie de l'œil qui permet de voir les couleurs ?</span> - Rétine</h5>
+<h5><span>Quel est le nom de l'élément chimique le plus léger ?</span> - Hydrogène</h5>
+<h5><span>Quel est le nom de la science qui étudie les fossiles ?</span> - Paléontologie</h5>
+<h5><span>Quel est le nom de la théorie qui décrit l'évolution des espèces ?</span> - Théorie de l'évolution</h5>
+<h5><span>Quel est le nom de la partie du cerveau responsable de la mémoire à court terme ?</span> - Hippocampe</h5>
+<h5><span>Quel est le nom de la science qui étudie les étoiles et les galaxies ?</span> - Astronomie</h5>
+<h5><span>Quel est le nom de la théorie qui décrit la structure de l'univers ?</span> - Théorie du Big Bang</h5>
+<h5><span>Quel est le nom de la partie de la cellule responsable de la production d'énergie ?</span> - Mitochondrie</h5>
+<h5><span>Quel est le nom de la science qui étudie le comportement animal ?</span> - Éthologie</h5>
+<h5><span>Quel est le nom de la force qui permet aux avions de voler ?</span> - Force de portance</h5>
+<h5><span>Quel est le nom de la science qui étudie les météorites ?</span> - Planétologie</h5>
+<h5><span>Quel est le nom de la partie de l'œil qui régule la quantité de lumière qui entre ?</span> - Iris</h5>
+<h5><span>Quel est le nom de la science qui étudie les volcans ?</span> - Volcanologie</h5>
+<h5><span>Quel est le nom de la théorie qui décrit la structure de la matière ?</span> - Théorie quantique</h5>
+<h5><span>Quel est le nom de la partie de la plante qui produit les graines ?</span> - Fleur</h5>
+<h5><span>Quel est le nom de la science qui étudie les océans ?</span> - Océanographie</h5>
+<h5><span>Quel est le nom de la partie du cerveau responsable du contrôle moteur ?</span> - Cervelet</h5>
+<h5><span>Quel est le nom de la science qui étudie les virus ?</span> - Virologie</h5>
+<h5><span>Quel est le nom de la théorie qui décrit la formation des montagnes ?</span> - Théorie de la tectonique des plaques</h5>
+<h5><span>Quel est le nom de la partie de l'ADN qui contient les informations génétiques ?</span> - Gène</h5>
+<h5><span>Quel est le nom de la science qui étudie les tremblements de terre et les éruptions volcaniques ?</span> - Sismologie</h5>
+<h5><span>Quel est le nom de la partie de l'atome qui contient les protons et les neutrons ?</span> - Noyau</h5>
+<h5><span>Quel est le nom de la partie du cerveau responsable de la coordination des mouvements volontaires ?</span> - Cervelet</h5>
+<h5><span>Quel est le nom de la théorie qui explique la façon dont les humains évoluent en fonction de leur environnement ?</span> - Théorie de l'évolution</h5>
+
+</div>
+
+</body>
+</html>
